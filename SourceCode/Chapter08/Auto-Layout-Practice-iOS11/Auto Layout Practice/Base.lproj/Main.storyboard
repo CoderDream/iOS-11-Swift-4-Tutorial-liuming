@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Auto_Layout_Practice" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFW-Nz-sot" userLabel="Top View">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="284"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="applePad" translatesAutoresizingMaskIntoConstraints="NO" id="U1P-Ve-u7E">
+                                        <rect key="frame" x="40" y="78" width="240" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="Hh4-jF-MkV"/>
+                                            <constraint firstAttribute="height" constant="128" id="gDK-pf-fSr"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="U1P-Ve-u7E" firstAttribute="centerX" secondItem="PFW-Nz-sot" secondAttribute="centerX" id="GaJ-Ia-HxC"/>
+                                    <constraint firstItem="U1P-Ve-u7E" firstAttribute="centerY" secondItem="PFW-Nz-sot" secondAttribute="centerY" id="tmC-ql-Evr"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZMX-6M-l3H" userLabel="Bottom View">
+                                <rect key="frame" x="0.0" y="284" width="320" height="284"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="apple-watch" translatesAutoresizingMaskIntoConstraints="NO" id="ev6-0b-nPJ">
+                                        <rect key="frame" x="40" y="78" width="240" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="128" id="6gW-ut-4EP"/>
+                                            <constraint firstAttribute="width" constant="240" id="SQp-4u-Yz4"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ev6-0b-nPJ" firstAttribute="centerY" secondItem="ZMX-6M-l3H" secondAttribute="centerY" id="9ZP-nn-nJ3"/>
+                                    <constraint firstItem="ev6-0b-nPJ" firstAttribute="centerX" secondItem="ZMX-6M-l3H" secondAttribute="centerX" id="NBt-pE-dez"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ZMX-6M-l3H" secondAttribute="trailing" id="9vM-DY-oHj"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ZMX-6M-l3H" secondAttribute="bottom" id="Jgu-pF-2gO"/>
+                            <constraint firstAttribute="trailing" secondItem="PFW-Nz-sot" secondAttribute="trailing" id="K0R-Fw-cMv"/>
+                            <constraint firstItem="PFW-Nz-sot" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="QO5-Pw-i5l"/>
+                            <constraint firstItem="ZMX-6M-l3H" firstAttribute="top" secondItem="PFW-Nz-sot" secondAttribute="bottom" id="RBo-8a-W8d"/>
+                            <constraint firstItem="ZMX-6M-l3H" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="YJk-t7-86B"/>
+                            <constraint firstItem="ZMX-6M-l3H" firstAttribute="height" secondItem="PFW-Nz-sot" secondAttribute="height" id="bZJ-MT-TZB"/>
+                            <constraint firstItem="PFW-Nz-sot" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="swn-pE-7TV"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="apple-watch" width="447" height="523"/>
+        <image name="applePad" width="510" height="654"/>
+    </resources>
+</document>
