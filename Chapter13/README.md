@@ -14,7 +14,7 @@
 
 图13-2 事项列表中的渐变色  
 
-图13-2所示就是我们所添加的事项条目，你可以勾选这些条目，代表该任务已经完成，也可以通过向左滑动将它们删除。除此以外，你还可以在事务列表中搜索关键字，比如我们可以搜索“苹果”关键字，然后单击搜索，这样就可以看到在列表中会列出包含“苹果”的相关条目。最神奇的地方在于，应用中所有的数据都被保存到了模拟器本地，或者是iPhone的物理真机上面。这也就意味着如果你在设备上关闭了应用，或者是升级了该应用，或者是升级了iOS的版本，或者是换了一部新手机，所有的数据还会储存在你的设备上。如果你单击购物清单事务的话，仍然可以看到里边存储的条目。这就是本章我们要完成的任务。
+图13-2所示就是我们所添加的事项条目，你可以勾选这些条目，代表该任务已经完成，也可以通过向左滑动将它们删除。除此以外，你还可以在事务列表中搜索关键字，比如我们可以搜索"苹果"关键字，然后单击搜索，这样就可以看到在列表中会列出包含"苹果"的相关条目。最神奇的地方在于，应用中所有的数据都被保存到了模拟器本地，或者是iPhone的物理真机上面。这也就意味着如果你在设备上关闭了应用，或者是升级了该应用，或者是升级了iOS的版本，或者是换了一部新手机，所有的数据还会储存在你的设备上。如果你单击购物清单事务的话，仍然可以看到里边存储的条目。这就是本章我们要完成的任务。
 
 本章我们会使用不同的方式去处理本地的数据，包括使用default存储少量的数据。另外，还可以使用Core Data存储大批量的数据。Core Data就像我们所使用的数据库。在本应用中，我们将会创建一个关系型数据库——Realm，并以该数据库作为后台。最后，我们还会编写一些前端代码，让我们的应用程序看起来更加漂亮。
 
@@ -171,12 +171,12 @@ override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath
 
 - 实战：提交项目到GitHub。  
 
-步骤1：在代码控制导航中，在顶部的TODO条目单击鼠标右键，在快捷菜单中选择Create “TODO” Remote on GitHub。在弹出的面板中设置Repository Name为TODO，设置Remote Name为origin，最后单击Create按钮，如图13-11所示。  
+步骤1：在代码控制导航中，在顶部的TODO条目单击鼠标右键，在快捷菜单中选择Create "TODO" Remote on GitHub。在弹出的面板中设置Repository Name为TODO，设置Remote Name为origin，最后单击Create按钮，如图13-11所示。  
   
 ![](snapshot/Ch1311.jpeg)  
 图13-11 在GitHub账号中创建一个新的仓库  
 
-步骤2：在菜单中选择Source Control/Commit...，可以发现此时我们修改了项目中不少的文件。将提交信息设置为“TODOListViewController完成datasource和delegate方法”，并勾选Push to remote:origin/master，单击Commit 4 Files按钮，如图13-12所示。  
+步骤2：在菜单中选择Source Control/Commit...，可以发现此时我们修改了项目中不少的文件。将提交信息设置为"TODOListViewController完成datasource和delegate方法"，并勾选Push to remote:origin/master，单击Commit 4 Files按钮，如图13-12所示。  
 
 ![](snapshot/Ch1312.jpeg)  
 图13-12 将修改提交到GitHub上面  
@@ -204,16 +204,16 @@ override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath
   present(alert, animated: true, completion: nil)
 }
 ```  
-当用户单击+按钮以后，会执行addButtonPressed(_ sender: UIBarButtonItem) 方法。在该方法中，我们会创建一个UIAlertController类型的对象，并设置警告对话框的标题为“添加一个新的ToDo项目”，风格为．alert类型，如图13-13所示。UIAlertController警告对话框一共有两种风格：Alert和ActionSheet。第一种风格会出现在屏幕的中央位置，第二种则会从屏幕底部滑出。  
+当用户单击+按钮以后，会执行addButtonPressed(_ sender: UIBarButtonItem) 方法。在该方法中，我们会创建一个UIAlertController类型的对象，并设置警告对话框的标题为"添加一个新的ToDo项目"，风格为．alert类型，如图13-13所示。UIAlertController警告对话框一共有两种风格：Alert和ActionSheet。第一种风格会出现在屏幕的中央位置，第二种则会从屏幕底部滑出。  
 
 ![](snapshot/Ch1313.jpeg)    
 图13-13 警告对话框的两种风格   
 
-在addButtonPressed(_ sender: UIBarButtonItem) 方法中，我们接着创建了UIAlertAction类型的对象，它会在对话框中呈现一个用户可以单击的按钮，一旦用户填写了新的条目信息，就可以单击该按钮。这里设置按钮的风格为default，在单击按钮以后会执行方法中的handler闭包，这里带有一个参数，就是用户单击的这个UIAlertAction对象。在闭包中我们先简单打印一个“成功！”信息到控制台。  
+在addButtonPressed(_ sender: UIBarButtonItem) 方法中，我们接着创建了UIAlertAction类型的对象，它会在对话框中呈现一个用户可以单击的按钮，一旦用户填写了新的条目信息，就可以单击该按钮。这里设置按钮的风格为default，在单击按钮以后会执行方法中的handler闭包，这里带有一个参数，就是用户单击的这个UIAlertAction对象。在闭包中我们先简单打印一个"成功！"信息到控制台。  
 
 后面的代码会将所创建的UIAlertAction对象添加到UIAlertController对话框之中，最后通过present() 方法将警告对话框显示到屏幕上。
 
-构建并运行项目，在单击+号以后，可以看到一个警告对话框出现在屏幕上面。当单击添加项目按钮以后，控制台会显示“成功！”信息，如图13-14所示。  
+构建并运行项目，在单击+号以后，可以看到一个警告对话框出现在屏幕上面。当单击添加项目按钮以后，控制台会显示"成功！"信息，如图13-14所示。  
 
 ![](snapshot/Ch1314.jpeg)  
 图13-14 警告对话框的运行效果  
@@ -274,7 +274,7 @@ override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath
 
 接下来，我们需要将文本框中的数据添加到itemArray数组之中。
 
-步骤3：为了可以将数据添加到itemArray数组之中，将itemArray常量修改为变量var itemArray = [“购买水杯”, “吃药”, “修改密码”]。  
+步骤3：为了可以将数据添加到itemArray数组之中，将itemArray常量修改为变量var itemArray = ["购买水杯", "吃药", "修改密码"]。  
 
 步骤4：在UIAlertAction的闭包中，修改代码如下：  
 ```swift
@@ -289,7 +289,7 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
 ![](snapshot/Ch1301.jpeg)  
 图13-16 将新添加的事务添加到数组之中
 
-在完成了添加新项目到表格视图以后，我们再次提交项目到远程仓库中。设置提交信息为“添加项目功能完成！”，注意一定要勾选Push to remote:origin/master，如图13-17所示。  
+在完成了添加新项目到表格视图以后，我们再次提交项目到远程仓库中。设置提交信息为"添加项目功能完成！"，注意一定要勾选Push to remote:origin/master，如图13-17所示。  
 
 ![](snapshot/Ch1317.jpeg)  
 图13-17 提交修改到GitHub  
@@ -331,7 +331,7 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
 ![](snapshot/Ch1319.jpeg)  
 图13-19 应用程序都存在于自己的安全沙箱之中  
 
-对于你的应用来说，沙箱就像是一个小型的“监狱”。每个应用都拥有存储文件和文档的文件夹，它们可以随意读取自己的文件夹，但是绝对无法读取其他应用的文件或文档文件夹。
+对于你的应用来说，沙箱就像是一个小型的"监狱"。每个应用都拥有存储文件和文档的文件夹，它们可以随意读取自己的文件夹，但是绝对无法读取其他应用的文件或文档文件夹。
 
 每次在你将iPhone的应用备份到Mac或者是iCloud云端的时候，应用中的Document文件夹总是会被备份。如果你购买了一个全新的iPhone，所存储到Document文件夹中的数据都不会被删除，这样就可以保证恢复到新iPhone的应用还保留有之前的数据。换句话说，如果将数据存储到应用的Document文件夹之中，不管是更换了iPhone，还是升级了iOS系统，还是升级了应用程序版本，你的私有数据还会安全的存在于iCloud云端或是本地的Mac电脑中。
 
@@ -374,7 +374,7 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
 步骤3：在AppDelegate类的didFinishLaunchingWithOptions() 方法中，通过下面的代码可以找出该应用在Mac操作系统中的实际位置。
 ```swift
 func  application(_  application:  UIApplication,  didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? ) -> Bool {
-print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask,true).last! as String)
+  print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask,true).last! as String)
 
   return true
 }
@@ -402,6 +402,9 @@ data/Containers/Data/Application/D2722567-82A1-457C-B57E-7D1D9B9A008F/Documents
 ![](snapshot/Ch1320.jpeg)  
 图13-20 应用程序在自己沙箱中的四个文件夹  
 
+![](snapshot/Ch1353.jp"g)  
+图13-53 应用程序在自己沙箱中的四个文件夹(iPhone真机调试)  
+
 因为通过UserDefaults类存储的数据都会保存到Library/Preferences之中，所以我们可以进入该文件夹，你会发现里面有一个类似cn.l iuming.TODO.plist的文件。双击打开它以后会发现里面存储着四个事务项目。其中ToDoListArray就是在set() 方法中定义的键名，其内部包含了四个元素，如图13-21所示。   
  
 ![](snapshot/Ch1321.jpeg)  
@@ -424,7 +427,7 @@ override func viewDidLoad() {
 
 构建并运行项目，此时我们会看到表格视图中已经出现了四个事务项目，如果你愿意可以再添加一个项目，终止应用程序的运行以后再次将其打开，效果依旧。  
 
-现在，我们需要再次提交修改后的项目到仓库。提交信息可以设置为“使用UserDefaults方法将数据保存到本地”。记住勾选Push to remote:origin/master。
+现在，我们需要再次提交修改后的项目到仓库。提交信息可以设置为"使用UserDefaults方法将数据保存到本地"。记住勾选Push to remote:origin/master。
 
 ### 13.3.3 UserDefaults说明
 
@@ -433,9 +436,7 @@ override func viewDidLoad() {
 在Playground中编写下面的这些代码。
 ```swift
 let defaults = UserDefaults.standard
-
 defaults.set(0.24, forKey: "Volume")
-
 let volume = defaults.float(forKey: "Volume")
 ```
     
@@ -509,7 +510,7 @@ print(yourCar.colour)
 
 目前我们的应用程序看起来非常漂亮，但是这里面存在着一系列的Bug，只不过你还没有发现。  
 
-让我们在itemArray数组里面添加多个项目，例如var itemArray = [“购买水杯”, “吃药”, “修改密码”, “a”, “b”, “c”, “d”, “e”, “f”, “g”, “h”, “i”, “j”, “k”, “l”, “m”,“n”, “o”, “p”]，然后再将viewDidLoad() 方法中读取UserDefaults的数据到itemArray数组的代码注释掉。  
+让我们在itemArray数组里面添加多个项目，例如var itemArray = ["购买水杯", "吃药", "修改密码", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m","n", "o", "p"]，然后再将viewDidLoad() 方法中读取UserDefaults的数据到itemArray数组的代码注释掉。  
 
 此时构建并运行项目，在模拟器中我们可以看到，所列出的项目已经超出了当前屏幕的范围，我们可以通过上下滚动表格视图浏览所有的项目。但是，当我们单击第一个单元格时，在它的右侧会出现一个勾选状态。如果再上下移动表格视图的话，你就会发现之前的勾选发生了错位。不管我们如何调整，总是有错位的情况出现，如图13-23所示。  
 
@@ -520,7 +521,8 @@ print(yourCar.colour)
 
 这就需要我们在复用每一个单元格的时候，针对当前的数据检查它的勾选状态。当前的数据都是通过一个简单的数组提供的，从现在开始显然不能满足我们的需求了，我们需要创建一个全新的数据模型。
 
-- 实战：创建数据模型。
+- 实战：创建数据模型。  
+
 步骤1：在TODO文件夹中创建一个新的Group，名称为Data Model。在该组中创建一个新的swift文件，名称为Item.swift。  
 
 - 提示
@@ -620,7 +622,7 @@ return cell
 ```
 当表格视图中的单元格需要刷新的时候，根据Item对象的done属性值来设置单元格的勾选状态。  
 - 提示  
-如果你愿意，可以在该方法中添加一个print语句：print(“更新第：\(indexPath. row) 行”) ，我们可以在控制台查看单元格的更新状态。  
+如果你愿意，可以在该方法中添加一个print语句：print("更新第：\(indexPath. row) 行") ，我们可以在控制台查看单元格的更新状态。  
 
 构建并运行项目，单击单元格以后可以看到修改后的效果。  
 
@@ -1214,7 +1216,7 @@ func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 }
 ```  
 
-这里创建一个NSPredicate类型的对象，format参数代表查询的谓词，即搜索条件。这里会搜索Item实体中title里面包含(CONTAINS) 搜索栏里面的字符的记录，[c]代表不区分大小写。其中%@是通配符，它会被第二个参数的值替代。如果搜索栏中的内容是“拯救”，则format参数的字符串就为“title CONTAINS[c] 拯救”。最后将过滤谓词添加到request搜索请求之中。  
+这里创建一个NSPredicate类型的对象，format参数代表查询的谓词，即搜索条件。这里会搜索Item实体中title里面包含(CONTAINS) 搜索栏里面的字符的记录，[c]代表不区分大小写。其中%@是通配符，它会被第二个参数的值替代。如果搜索栏中的内容是"拯救"，则format参数的字符串就为"title CONTAINS[c] 拯救"。最后将过滤谓词添加到request搜索请求之中。  
 
 如果大家对于谓词过滤语句还不是很熟悉的话，在GitHub的相关资源中为大家提供了一个谓词相关的文档，大家可以轻松查到符合自己需要的查询语句。  
 
@@ -1342,7 +1344,7 @@ if searchBar.text? .count == 0 {
 ![](snapshot/Ch1342.jpeg)  
 图13-42 中断应用程序在模拟器中的运行  
 
-在Debug导航区域中，我们发现有应用运行了多个线程，它们中的一个是主线程，也就是Thread 1。例如，如果我们通过网络在主线程调用云端bomb数据库，则在Internet上面获取数据的时候，你的应用会处于“冻结”的状态，直到获取数据的操作完成。因此，我们需要将这个任务放在后台线程，也就是其他线程中去处理，如图13-43所示。  
+在Debug导航区域中，我们发现有应用运行了多个线程，它们中的一个是主线程，也就是Thread 1。例如，如果我们通过网络在主线程调用云端bomb数据库，则在Internet上面获取数据的时候，你的应用会处于"冻结"的状态，直到获取数据的操作完成。因此，我们需要将这个任务放在后台线程，也就是其他线程中去处理，如图13-43所示。  
 
 ![](snapshot/Ch1343.jpeg)  
 图13-43 应用程序运行时候的主线程与后台线程  
