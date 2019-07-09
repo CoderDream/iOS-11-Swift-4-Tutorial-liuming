@@ -99,9 +99,9 @@ override func tableView(_ tableView: UITableView, numberOfRowsInSection section:
 }
 ```  
 
-在cellForRowAt（）方法中，我们首先从表格视图中获取一个可复用的单元格对象，这个单元格的标识为ToDoItemCell，其是和之前在故事板中为Prototype Cell设置的标识一样的单元格。之后设置textLabel的text为数组中相应的元素内容，textLabel是每个单元格对象都会有的内置Label。  
+在cellForRowAt() 方法中，我们首先从表格视图中获取一个可复用的单元格对象，这个单元格的标识为ToDoItemCell，其是和之前在故事板中为Prototype Cell设置的标识一样的单元格。之后设置textLabel的text为数组中相应的元素内容，textLabel是每个单元格对象都会有的内置Label。  
 
-在numberOfRowsInSection（）方法中，直接返回itemArray数组的元素个数作为单元格的数量。
+在numberOfRowsInSection() 方法中，直接返回itemArray数组的元素个数作为单元格的数量。
 构建并运行项目，效果如图13-8所示。  
 ![](snapshot/Ch1308.jpeg)  
 图13-8 在单元格中显示自定义好的事项  
@@ -211,7 +211,7 @@ override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath
 
 在addButtonPressed（_ sender: UIBarButtonItem）方法中，我们接着创建了UIAlertAction类型的对象，它会在对话框中呈现一个用户可以单击的按钮，一旦用户填写了新的条目信息，就可以单击该按钮。这里设置按钮的风格为default，在单击按钮以后会执行方法中的handler闭包，这里带有一个参数，就是用户单击的这个UIAlertAction对象。在闭包中我们先简单打印一个“成功！”信息到控制台。  
 
-后面的代码会将所创建的UIAlertAction对象添加到UIAlertController对话框之中，最后通过present（）方法将警告对话框显示到屏幕上。
+后面的代码会将所创建的UIAlertAction对象添加到UIAlertController对话框之中，最后通过present() 方法将警告对话框显示到屏幕上。
 
 构建并运行项目，在单击+号以后，可以看到一个警告对话框出现在屏幕上面。当单击添加项目按钮以后，控制台会显示“成功！”信息，如图13-14所示。  
 
@@ -237,8 +237,8 @@ override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath
 }
 ```  
 
-我们通过UIAlertController的addTextField（）方法在对话框中添加了一个文本框，完成闭包的参数代表所创建的文本框对象，在闭包中设置了文本框的placeholder属性，并且在用户单击按钮以后，还会将用户所输入的事务名称打印到控制台。
-构建并运行项目，经过测试我们发现，所填写的事务信息并没有打印到控制台。这是因为在用户单击按钮以后只调用了UIAlertAction的闭包，因此就不会再执行addTextField（）的闭包了。该闭包的代码在之前向对话框中添加文本框的时候已经被执行了。  
+我们通过UIAlertController的addTextField() 方法在对话框中添加了一个文本框，完成闭包的参数代表所创建的文本框对象，在闭包中设置了文本框的placeholder属性，并且在用户单击按钮以后，还会将用户所输入的事务名称打印到控制台。
+构建并运行项目，经过测试我们发现，所填写的事务信息并没有打印到控制台。这是因为在用户单击按钮以后只调用了UIAlertAction的闭包，因此就不会再执行addTextField() 的闭包了。该闭包的代码在之前向对话框中添加文本框的时候已经被执行了。  
 
 这时，我们需要在方法中声明一个变量，用于存储alertTextField对象，这样在UIAlertAction闭包中就可以随时访问它了。  
 
@@ -284,7 +284,7 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
   self.tableView.reloadData()
 }
 ```  
-这里，我们将文本框中的数据添加到itemArray数组之中。除此以外，还要通过表格视图的reloadData（）方法让其重新载入数据来更新表格视图中所显示的数据，如图13-16所示。  
+这里，我们将文本框中的数据添加到itemArray数组之中。除此以外，还要通过表格视图的reloadData() 方法让其重新载入数据来更新表格视图中所显示的数据，如图13-16所示。  
 
 ![](snapshot/Ch1301.jpeg)  
 图13-16 将新添加的事务添加到数组之中
@@ -305,13 +305,13 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
 
 在didFinishLaunchingWithOptions() 方法中添加一行打印语句：print（"didFinishLaunchi ngWithOptions"）。  
 
-当应用在前台运行的时候，如果有电话打进来就会调用applicationWillResignActive（）方法。在用户选择接听电话后，我们可以在该方法中执行相关指令防止用户数据丢失。比如用户正在应用中填写表单的时候有电话打进来，我们可以在该方法中将数据保存到本地。  
+当应用在前台运行的时候，如果有电话打进来就会调用applicationWillResignActive() 方法。在用户选择接听电话后，我们可以在该方法中执行相关指令防止用户数据丢失。比如用户正在应用中填写表单的时候有电话打进来，我们可以在该方法中将数据保存到本地。  
 
-在应用的界面从屏幕上消失的时候就会调用applicationDidEnterBackground（）方法。比如当用户按Home键，或者是打开了另一个不同的应用，这也就意味着我们的应用进入了后台。
+在应用的界面从屏幕上消失的时候就会调用applicationDidEnterBackground() 方法。比如当用户按Home键，或者是打开了另一个不同的应用，这也就意味着我们的应用进入了后台。
 
-在applicationDidEnterBackground（）方法中添加一行打印语句：print（"applicationDidEn terBackground"）。  
+在applicationDidEnterBackground() 方法中添加一行打印语句：print（"applicationDidEn terBackground"）。  
 
-还有一个非常重要的方法是applicationWillTerminate（），当应用被用户或系统终止运行的时候就会调用该方法。在该方法中添加print（"applicationWillTerminate"）语句。
+还有一个非常重要的方法是applicationWillTerminate() ，当应用被用户或系统终止运行的时候就会调用该方法。在该方法中添加print（"applicationWillTerminate"）语句。
 
 让我们再次运行项目，观察AppDelegate中各种委托方法的执行顺序。当应用启动以后，在控制台首先会看到didFinishLaunchingWithOptions，该方法会在应用启动后的第一时间运行。当用户单击Home键回到主屏幕以后，在控制台会看到applicationDidEnterBackground。另外，当我们切换到另一个应用的时候也会看到该信息。最后，当系统需要回收宝贵的内存资源，或者是被用户强制退出的时候才会执行applicationWillTerminate() 方法。双击Home键，在iOS应用程序切换选择界面中将TODO项目向上划出屏幕以后，会在控制台看到applicationWillTerminate信息。
 
@@ -367,11 +367,11 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
 }
 ```
 
-因为是在闭包之中，所以必须要使用self．表示调用的变量和方法都是在类中声明或创建的。通过set（）方法，将itemArray数组存储到UserDefaults中，与其对应的键名为ToDoListArray。
+因为是在闭包之中，所以必须要使用self．表示调用的变量和方法都是在类中声明或创建的。通过set() 方法，将itemArray数组存储到UserDefaults中，与其对应的键名为ToDoListArray。
 
-如果此时构建并运行项目，在添加一个新的事务以后，终止应用再重新开启它，表格中依然只会看到之前的三个事务。这是因为目前在代码中还没有让UserDefaults对象执行保存命令。只有在执行了保存命令以后，通过set（）方法所设置的键/值配对数据才会保存到一个plist格式的文件中。接下来，让我们找到这个文件的位置并看看它的存储格式。
+如果此时构建并运行项目，在添加一个新的事务以后，终止应用再重新开启它，表格中依然只会看到之前的三个事务。这是因为目前在代码中还没有让UserDefaults对象执行保存命令。只有在执行了保存命令以后，通过set() 方法所设置的键/值配对数据才会保存到一个plist格式的文件中。接下来，让我们找到这个文件的位置并看看它的存储格式。
 
-步骤3：在AppDelegate类的didFinishLaunchingWithOptions（）方法中，通过下面的代码可以找出该应用在Mac操作系统中的实际位置。
+步骤3：在AppDelegate类的didFinishLaunchingWithOptions() 方法中，通过下面的代码可以找出该应用在Mac操作系统中的实际位置。
 ```swift
 func  application(_  application:  UIApplication,  didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? ) -> Bool {
 print(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask,true).last! as String)
@@ -402,7 +402,7 @@ data/Containers/Data/Application/D2722567-82A1-457C-B57E-7D1D9B9A008F/Documents
 ![](snapshot/Ch1320.jpeg)  
 图13-20 应用程序在自己沙箱中的四个文件夹  
 
-因为通过UserDefaults类存储的数据都会保存到Library/Preferences之中，所以我们可以进入该文件夹，你会发现里面有一个类似cn.l iuming.TODO.plist的文件。双击打开它以后会发现里面存储着四个事务项目。其中ToDoListArray就是在set（）方法中定义的键名，其内部包含了四个元素，如图13-21所示。   
+因为通过UserDefaults类存储的数据都会保存到Library/Preferences之中，所以我们可以进入该文件夹，你会发现里面有一个类似cn.l iuming.TODO.plist的文件。双击打开它以后会发现里面存储着四个事务项目。其中ToDoListArray就是在set() 方法中定义的键名，其内部包含了四个元素，如图13-21所示。   
  
 ![](snapshot/Ch1321.jpeg)  
 图13-21 应用程序在自己沙箱中的四个文件夹  
@@ -446,7 +446,7 @@ let volume = defaults.float(forKey: "Volume")
 ![](snapshot/Ch1322.jpeg)  
 图13-22 在UserDefaults中存储不同基础类型的数据  
 
-请注意，我们将一个日期型对象Date（）也存储到了UserDefaults之中，在获取它的时候，必须使用object（）方法，因为UserDefaults在存储它的时候是将它作为Any类型存储的。Any类型实际代表的就是任意的类型。  
+请注意，我们将一个日期型对象Date() 也存储到了UserDefaults之中，在获取它的时候，必须使用object() 方法，因为UserDefaults在存储它的时候是将它作为Any类型存储的。Any类型实际代表的就是任意的类型。  
 
 接下来，让我们看看集合类型的操作。
 
@@ -460,7 +460,7 @@ let myArray = defaults.array(forKey: "myArray")
 let myDictionary = defaults.dictionary(forKey: "myDictionary")
 ```
 
-其中，UserDefaults针对数组和字典有自己单独的方法array（）和dictionary（）。  
+其中，UserDefaults针对数组和字典有自己单独的方法array() 和dictionary() 。  
 
 UserDefaults方式的存储非常灵活、简单，但是它只能存储几千字节的内容和简单的类型，对于大量的数据无法很好地管理，因为它毕竟不是数据库，也不能将它作为数据库来用，它只是一个简单的键/值配对的数据集，并以plist格式存储文件。  
 
@@ -509,14 +509,14 @@ print(yourCar.colour)
 
 目前我们的应用程序看起来非常漂亮，但是这里面存在着一系列的Bug，只不过你还没有发现。  
 
-让我们在itemArray数组里面添加多个项目，例如var itemArray = [“购买水杯”, “吃药”, “修改密码”, “a”, “b”, “c”, “d”, “e”, “f”, “g”, “h”, “i”, “j”, “k”, “l”, “m”,“n”, “o”, “p”]，然后再将viewDidLoad（）方法中读取UserDefaults的数据到itemArray数组的代码注释掉。  
+让我们在itemArray数组里面添加多个项目，例如var itemArray = [“购买水杯”, “吃药”, “修改密码”, “a”, “b”, “c”, “d”, “e”, “f”, “g”, “h”, “i”, “j”, “k”, “l”, “m”,“n”, “o”, “p”]，然后再将viewDidLoad() 方法中读取UserDefaults的数据到itemArray数组的代码注释掉。  
 
 此时构建并运行项目，在模拟器中我们可以看到，所列出的项目已经超出了当前屏幕的范围，我们可以通过上下滚动表格视图浏览所有的项目。但是，当我们单击第一个单元格时，在它的右侧会出现一个勾选状态。如果再上下移动表格视图的话，你就会发现之前的勾选发生了错位。不管我们如何调整，总是有错位的情况出现，如图13-23所示。  
 
 ![](snapshot/Ch1323.jpeg)  
 图13-23 部分单元格在勾选以后发生了错位的情况  
 
-产生上述Bug的原因在于表格视图单元格的复用。当我们通过dequeueReusableCell（）方法获取一个可复用的单元格对象的时候，表格视图会去查找标识为ToDoItemCell的可以复用的单元格对象并启用它们。这也就意味着，当位于表格视图中第一个位置的单元格被向上滑出表格以后，它就不再可见，而且会被马上移到表格视图的底部，作为一个可以复用的单元格时刻准备从底部再次出现。当它再次出现的时候，之前的勾选状态并未被重置，所以带着之前那个单元格对象的状态又出现在了表格的底部。我们要如何避免这样的情况发生呢？  
+产生上述Bug的原因在于表格视图单元格的复用。当我们通过dequeueReusableCell() 方法获取一个可复用的单元格对象的时候，表格视图会去查找标识为ToDoItemCell的可以复用的单元格对象并启用它们。这也就意味着，当位于表格视图中第一个位置的单元格被向上滑出表格以后，它就不再可见，而且会被马上移到表格视图的底部，作为一个可以复用的单元格时刻准备从底部再次出现。当它再次出现的时候，之前的勾选状态并未被重置，所以带着之前那个单元格对象的状态又出现在了表格的底部。我们要如何避免这样的情况发生呢？  
 
 这就需要我们在复用每一个单元格的时候，针对当前的数据检查它的勾选状态。当前的数据都是通过一个简单的数组提供的，从现在开始显然不能满足我们的需求了，我们需要创建一个全新的数据模型。
 
@@ -540,7 +540,7 @@ class Item {
 ``` 
 在Item类中，title是字符串类型用于存储事务的名称。done是布尔类型，用于指明是否完成了该事务，这里将它的初始值设置为false，代表该事务没有完成。  
 
-步骤3：回到TodoListViewController.swift文件，首先将itemArray属性修改为var itemArray = [Item]（），然后修改viewDidLoad（）方法中的代码，修改后如下面的样子。
+步骤3：回到TodoListViewController.swift文件，首先将itemArray属性修改为var itemArray = [Item]() ，然后修改viewDidLoad() 方法中的代码，修改后如下面的样子。
 ```swift
 override func viewDidLoad() {
   super.viewDidLoad()
@@ -552,7 +552,7 @@ override func viewDidLoad() {
 ```
 在该方法中，我们首先创建了一个Item对象，并将title设置为之前的第一个事务，然后将该Item对象添加到itemArray数组之中，现在的itemArray是Item类型的数组。  
 
-步骤4：复制viewDidLoad（）方法中的代码，再添加两个事务。
+步骤4：复制viewDidLoad() 方法中的代码，再添加两个事务。
 ```swift
 override func viewDidLoad() {
   super.viewDidLoad()
@@ -572,7 +572,7 @@ override func viewDidLoad() {
 ```
 因为我们将itemArray从字符串数组修改为itemArray数组，所以接下来有很多的地方需要修改。  
 
-步骤5：在cellForRowAt（）方法中将cell.textLabel? .text = itemArray[indexPath.row]修改为cell.textLabel? .text = itemArray[indexPath.row].title，因为通过itemArray[indexPath.row]代码只能获取到Item对象，所以需要借助．title获取事务名称。  
+步骤5：在cellForRowAt() 方法中将cell.textLabel? .text = itemArray[indexPath.row]修改为cell.textLabel? .text = itemArray[indexPath.row].title，因为通过itemArray[indexPath.row]代码只能获取到Item对象，所以需要借助．title获取事务名称。  
 
 步骤6：在addButtonPressed（_ sender: UIBarButtonItem）方法中，修改UIAlertAction闭包中的代码。  
 ```swift
@@ -587,7 +587,7 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
 }
 ```  
 
-步骤7：在didSelectRowAt（）方法中，将用户每一次的操作记录到相应的Item对象的done属性之中，并重新刷新选中的单元格。  
+步骤7：在didSelectRowAt() 方法中，将用户每一次的操作记录到相应的Item对象的done属性之中，并重新刷新选中的单元格。  
 ```swift
 override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath:IndexPath) {
 
@@ -606,9 +606,9 @@ override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath
 ```
 通过indexPath参数，我们可以知道用户单击了哪个单元格，进而设置与单元格位置对应的itemArray数组中的Item对象的done属性。  
 
-然后我们通过UITableView类的beginUpdates（）方法告诉表格视图我们想要马上更新某些单元格对象的界面了。endUpdates（）方法则用于告诉表格视图更新单元格的操作结束。在这两个方法之间，我们需要通过UITableView的reloadRows（）方法告诉表格视图需要马上更新的单元格有哪些，更新的时候是否需要动画效果。这里需要更新的单元格是通过IndexPath类型的数组指定的。  
+然后我们通过UITableView类的beginUpdates() 方法告诉表格视图我们想要马上更新某些单元格对象的界面了。endUpdates() 方法则用于告诉表格视图更新单元格的操作结束。在这两个方法之间，我们需要通过UITableView的reloadRows() 方法告诉表格视图需要马上更新的单元格有哪些，更新的时候是否需要动画效果。这里需要更新的单元格是通过IndexPath类型的数组指定的。  
 
-步骤8：在cellForRowAt（）方法中，在return cell语句的上面添加下面的代码。  
+步骤8：在cellForRowAt() 方法中，在return cell语句的上面添加下面的代码。  
 ```swift
 if itemArray[indexPath.row].done == false {
   cell.accessoryType = .none
@@ -624,7 +624,7 @@ return cell
 
 构建并运行项目，单击单元格以后可以看到修改后的效果。  
 
-为了更好地测试多个Item的效果，我们在viewDidLoad（）方法中添加更多的事务。
+为了更好地测试多个Item的效果，我们在viewDidLoad() 方法中添加更多的事务。
 ```swift
 let newItem3 = Item()
 newItem3.title = "修改密码"
@@ -640,7 +640,7 @@ for index in 4...120 {
 ![](snapshot/Ch1325.jpeg)  
 图13-25 由代码生成的事务项目  
 
-在之前的cellForRowAt（）方法中，我们使用if语句，根据单元格的accessoryType的属性值设置勾选状态。下面我们使用一种简单的方法来实现该功能。  
+在之前的cellForRowAt() 方法中，我们使用if语句，根据单元格的accessoryType的属性值设置勾选状态。下面我们使用一种简单的方法来实现该功能。  
 ```swift
 let item = itemArray[indexPath.row]
 cell.accessoryType = item.done == true ? .checkmark : .none
@@ -680,9 +680,9 @@ return cell
 
 #### 13.4.1 使用NSCoder编码对象数组
 
-步骤1：需要删除didFinishLaunchingWithOptions（）方法中的print语句。  
+步骤1：需要删除didFinishLaunchingWithOptions() 方法中的print语句。  
 
-步骤2：在TodoListViewController类的viewDidLoad（）方法中，创建一个常量存储应用的Document的路径。  
+步骤2：在TodoListViewController类的viewDidLoad() 方法中，创建一个常量存储应用的Document的路径。  
 ```swift
 override func viewDidLoad() {
   super.viewDidLoad()
@@ -690,14 +690,14 @@ override func viewDidLoad() {
   let dataFilePath = FileManager.default.urls(for: .documentDirectory, in:.userDomainMask).first
 print(dataFilePath)
 ```
-其中，FileManager类用于管理应用中的文件系统，并通过default属性获取该类的实例。由此可见，它是一个单例类。在urls（）方法中，我们需要得到document的路径位置，所以这里使用．documentDirectory，注意在自动完成的列表中还有一个．documentation-Directory的枚举值，一定不要选它，这两个文件夹位置是完全不同的。通过urls（）方法我们会得到一个数组，其中第一个元素就是Document的位置。  
+其中，FileManager类用于管理应用中的文件系统，并通过default属性获取该类的实例。由此可见，它是一个单例类。在urls() 方法中，我们需要得到document的路径位置，所以这里使用．documentDirectory，注意在自动完成的列表中还有一个．documentation-Directory的枚举值，一定不要选它，这两个文件夹位置是完全不同的。通过urls() 方法我们会得到一个数组，其中第一个元素就是Document的位置。  
 
 构建并运行项目，在控制台中会打印类似下面的信息。  
 ```
 Optional(file:///Users/liumingl/Library/Developer/CoreSimulator/Devices/
 EE243D9-8088-8FB-04E-564773D5D88/data/Containers/Data/Application/CAA88251-FF23-4362-02C-E7A4886FEC1/Documents/)
 ```
-在上面的信息中，因为没有拆包可选的操作，所以会显示为Optional（）的形式。在finder中直接导航到Documents的文件夹。  
+在上面的信息中，因为没有拆包可选的操作，所以会显示为Optional() 的形式。在finder中直接导航到Documents的文件夹。  
 
 步骤3：删除TodoListViewController类中的UserDefaults变量的声明，然后修改之前的let dataFilePath代码为let dataFilePath = FileManager.default.urls（for: .documentDirectory, in: .userDomainMask）.first? .appendingPathComponent（"Items.plist"）。
 通过这样的修改，相当于在URL地址的后面添加了一个文件名，最终地址类似于……902C-4E7A4886FEC1/Documents/Items.plist。如果此时运行项目的话，在Documents文件夹中并不会存在该文件，目前只是生成一个地址而已。  
@@ -725,9 +725,9 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
   self.tableView.reloadData()
 }
 ```
-这里需要创建一个PropertyListEncoder类的实例，然后通过它的encode（）方法将Item类型数组编码为plist格式。此时编译器会报几个错误，让我们依次解决它。  
+这里需要创建一个PropertyListEncoder类的实例，然后通过它的encode() 方法将Item类型数组编码为plist格式。此时编译器会报几个错误，让我们依次解决它。  
 
-步骤5：因为encode（）方法具有throw功能，所以需要使用do...catch语句。  
+步骤5：因为encode() 方法具有throw功能，所以需要使用do...catch语句。  
 ```swift
 do {
   let data = try encoder.encode(self.itemArray)
@@ -736,7 +736,7 @@ do {
   print("编码错误：\(error)")
 }
 ```
-在上面的代码中，我们通过write（）方法，将数据存储到指定的路径。  
+在上面的代码中，我们通过write() 方法，将数据存储到指定的路径。  
 
 步骤6：为了可以对Item类型的对象编码，还需要让Item类符合Encodable协议。也就是说，要让Item类型能够编码为plist格式或者JSON格式。如果你自定义一个类，它的所有属性必须是标准数据类型，比如字符串、布尔、数组、字典等类型。
 ```swift
@@ -748,9 +748,9 @@ class Item: Encodable {
 图13-26 新添加的数据存储到Items.plist文件中  
 
 如果你用Items.plsit和之前的Userdefaults.plist文件对比，就会发现UserDefaults文件只能存储极为有限的数据类型，并且第一个根的类型值为Dictionary。
-对于事务状态的修改还存在一个Bug：当用户单击单元格以后，勾选状态还没有被存储到Items.plist文件中。我们需要将之前的存储代码拷贝到didSelectRowAt（）方法中。但是，更优雅的方式是添加一个新的saveItems（）方法。  
+对于事务状态的修改还存在一个Bug：当用户单击单元格以后，勾选状态还没有被存储到Items.plist文件中。我们需要将之前的存储代码拷贝到didSelectRowAt() 方法中。但是，更优雅的方式是添加一个新的saveItems() 方法。  
 
-步骤7：在TodoListViewController类的底部，添加saveItems（）方法。  
+步骤7：在TodoListViewController类的底部，添加saveItems() 方法。  
 ```swift
 func saveItems() {
   let encoder = PropertyListEncoder()
@@ -765,7 +765,7 @@ func saveItems() {
 ```
 因为不是在闭包中，所以可以删除方法中的self．语句。  
 
-步骤8：在UIAlertAction闭包和didSelectRowAt（）方法中调用该方法。  
+步骤8：在UIAlertAction闭包和didSelectRowAt() 方法中调用该方法。  
 ```swift
 let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
   // 用户单击添加项目按钮以后要执行的代码
@@ -784,7 +784,7 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:Index
 ``` 
 #### 13.4.2 使用NSCoder解码
 
-在TodoListViewController类的viewDidLoad（）方法中，我们依然使用着三个测试数据来填充itemArray数组。接下来，我们要实现从磁盘上的Items.plist文件读取之前保存的Item类型的数据。  
+在TodoListViewController类的viewDidLoad() 方法中，我们依然使用着三个测试数据来填充itemArray数组。接下来，我们要实现从磁盘上的Items.plist文件读取之前保存的Item类型的数据。  
 
 步骤1：在TodoListViewController类中添加一个新的方法。  
 ```swift
@@ -801,9 +801,9 @@ func loadItems() {
 ```
 通过Data类，我们从Documents文件夹下的Items.plist文件中读取数据。因为Data的初始化方法是throw类型，所以需要使用try命令。又因为其生成的对象是可选类型，所以这里又使用可选绑定将其拆包。如果从Items.plist读出了数据，则会执行if语句体中的代码。  
 
-在if语句体中，我们先定义了一个用于解码的PropertyListDecoder对象，然后通过它的decode（）方法将plist格式数据解码为Item数组对象。该方法的第一个参数就是用于指定解码后的数据类型，第二个参数提供解码的数据。  
+在if语句体中，我们先定义了一个用于解码的PropertyListDecoder对象，然后通过它的decode() 方法将plist格式数据解码为Item数组对象。该方法的第一个参数就是用于指定解码后的数据类型，第二个参数提供解码的数据。  
 
-步骤2：在viewDidLoad（）方法中，删除之前手动添加的三个newItem类型的测试数据对象，并调用loadItems（）方法。  
+步骤2：在viewDidLoad() 方法中，删除之前手动添加的三个newItem类型的测试数据对象，并调用loadItems() 方法。  
 ```swift
 override func viewDidLoad() {
   super.viewDidLoad()
@@ -932,23 +932,23 @@ public class Item: NSManagedObject {
 }
 ```  
 
-回到AppDelegate.swift文件中，我们之前在这里粘贴了两个方法，其中，persistentContainer是一个全局变量，saveContext（）是一个方法。  
+回到AppDelegate.swift文件中，我们之前在这里粘贴了两个方法，其中，persistentContainer是一个全局变量，saveContext() 是一个方法。  
 
-首先在applicationWillTerminate（）方法中调用saveContext（）方法，这样在应用程序退出时可以保存数据库中有改变的数据。  
+首先在applicationWillTerminate() 方法中调用saveContext() 方法，这样在应用程序退出时可以保存数据库中有改变的数据。  
 
 对于persistentContainer变量，它使用了一个我们从未见过的关键字lazy，它是做什么用的呢？当我们以lazy方式声明变量的时候，编译器不会马上创建该变量的实例，而是只有在需要用到它的时候才会去创建。也就相当于当我们试图使用persistentContainer变量时，才会去执行其内部的代码，创建该变量，占用需要的内存空间。
 这里我们创建的是NSPersistentContainer类型的变量，它是我们存储所有数据的基础，相当于SQLite数据库。通过NSPersistentContainer类，我们可以使用不同类型的数据库，比如用XML、SQLite。
 
-在声明变量的时候，我们会创建一个NSPersistentContainer类型的常量，并指定之前创建的Core Data模型——DataModel作为它的参数。这样，所有的相关信息都会被载入container常量之中。当使用loadPersistentStores（）方法载入模型后，可以通过完成闭包判定是否成功载入。如果成功，则返回该常量值给persistentContainer这个lazy变量。
+在声明变量的时候，我们会创建一个NSPersistentContainer类型的常量，并指定之前创建的Core Data模型——DataModel作为它的参数。这样，所有的相关信息都会被载入container常量之中。当使用loadPersistentStores() 方法载入模型后，可以通过完成闭包判定是否成功载入。如果成功，则返回该常量值给persistentContainer这个lazy变量。
 
-对于saveContext（）方法，它提供了存储数据方面的支持，我们只是先在应用终止运行的时候调用它。在该方法中我们定义了一个context，在后面我们会经常看到context，它实际上是一个区域，直到你将临时区域中的数据保存到context之前，我们可以在这个区域里修改和更新数据，也可以执行撤销和重做操作。对比之前的GitHub内容，Context很像是GitHub的临时区域，我们可以在这里修改、更新任何事情，直到Git将修改的内容提交到仓库之中。
+对于saveContext() 方法，它提供了存储数据方面的支持，我们只是先在应用终止运行的时候调用它。在该方法中我们定义了一个context，在后面我们会经常看到context，它实际上是一个区域，直到你将临时区域中的数据保存到context之前，我们可以在这个区域里修改和更新数据，也可以执行撤销和重做操作。对比之前的GitHub内容，Context很像是GitHub的临时区域，我们可以在这里修改、更新任何事情，直到Git将修改的内容提交到仓库之中。
 对于代码，我们需要了解两件重要的事情：一是创建了persistentContainer变量，它与SQLite数据库一样；二是context，它就是一个临时区域，我们可以在这里修改、删除数据。
 
 ### 13.5.2 如何使用Core Data存储数据  
 
 在本节我们将使用Core Data创建和保存事务数据。  
 
-在UIAlertAction闭包中，我们通过let newItem = Item（）代码创建了Item对象，但是在启用了Core Data特性后，需要另外一种不同的方法。  
+在UIAlertAction闭包中，我们通过let newItem = Item() 代码创建了Item对象，但是在启用了Core Data特性后，需要另外一种不同的方法。  
 ```swift
 let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
   // 用户单击添加项目按钮以后要执行的代码
@@ -966,13 +966,13 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
 - 提示  
 在Item上单击鼠标右键，可以看到此时的Item属于NSManagedObject的子类，是由Core Data负责管理的。  
 
-我们在AppDelegate类的saveContext（）方法中见过context，它是persistentContainer中的一个属性。  
+我们在AppDelegate类的saveContext() 方法中见过context，它是persistentContainer中的一个属性。  
 
 我们并不需要在TodoListViewController类中创建context属性，通过AppDelegate. persistentContainer.viewContext便可以获取到它。但是AppDelegate只是一个类，并不是对象，此时我们需要的是AppDelegate对象。  
 
 再通过UIApplication.shared可以获取到当前正在运行的应用实例，由此可见，UIApplication类也是单例模式。该对象中的delegate属性就是实例化的AppDelegate类型的对象，因为目前它的类型为UIApplicationDelegate，所以还需要再使用（UIApplication. shared.delegate as! AppDelegate）语句将其转换为我们的AppDelegate类的实例。  
 
-在saveItems（）方法中，我们需要调用context的save（）方法来存储数据，所以将代码修改为：  
+在saveItems() 方法中，我们需要调用context的save() 方法来存储数据，所以将代码修改为：  
 ```swift
 func saveItems() {
   do {
@@ -1042,7 +1042,7 @@ newItem.done = false  // 让done属性的默认值为false
 
 在默认情况下，Core Data使用SQLite作为后端数据库。这一节我们就来找出它的位置。  
 
-在viewDidLoad（）方法中添加一条打印语句：print（FileManager.default.urls（for:.document Directory, in: .userDomainMask））。
+在viewDidLoad() 方法中添加一条打印语句：print（FileManager.default.urls（for:.document Directory, in: .userDomainMask））。
 构建并运行项目，找到该应用的Library目录位置，再进入Application Support目录就可以看到DataModel.sqlite文件了，如图13-33所示。接下来就可以利用各种SQLite查看软件将其打开了。  
 
 ![](snapshot/Ch1333.jpeg)  
@@ -1070,16 +1070,16 @@ newItem.done = false  // 让done属性的默认值为false
 
 在编写程序代码的时候，我们不能直接与persistent容器交互，必须要通过一个中间件，也就是我们之前接触的context。这个context就是一个临时区域，我们可以在这个区域中创建欲添加到实体中的新记录、欲修改的数据或者是想要删除的数据。这也就是之前说的创建（Create）、读取（Read）、修改（Update）和销毁（Destroy）。  
 
-需要记住的一点是，所有的CRUD操作都要在context中进行，不能直接操作persistent container。另外，你还可以在context中执行取消（Undo）和重做（Redo）操作。最后在提交的时候我们只需要调用context的save（）方法即可，整个过程与GitHub极为相似，如图13-35所示。  
+需要记住的一点是，所有的CRUD操作都要在context中进行，不能直接操作persistent container。另外，你还可以在context中执行取消（Undo）和重做（Redo）操作。最后在提交的时候我们只需要调用context的save() 方法即可，整个过程与GitHub极为相似，如图13-35所示。  
 
 ![](snapshot/Ch1335.jpeg)  
 图13-35 应用、Context和Persistent Container之间的关系  
 
-就目前的项目来说，为了可以在控制器类中使用Core Data，我们定义了context属性。每个iOS应用程序都有一个UIApplication类型的对象，通过该对象的delegate属性，便可以获取到AppDelegate的实例，接下来再通过AppDelegate实例获取到该类中的persistentContainer属性。注意，persistentContainer是一个lazy变量，这意味着只有在用到该变量的时候，程序才会为我们创建它的实例。在初始化persistentContainer的时候，我们通过参数指定包含实体数据的数据模型。项目中的实体名称为Item，它包含两个属性title和done，然后通过loadPersistentStores（）方法载入DataModel。  
+就目前的项目来说，为了可以在控制器类中使用Core Data，我们定义了context属性。每个iOS应用程序都有一个UIApplication类型的对象，通过该对象的delegate属性，便可以获取到AppDelegate的实例，接下来再通过AppDelegate实例获取到该类中的persistentContainer属性。注意，persistentContainer是一个lazy变量，这意味着只有在用到该变量的时候，程序才会为我们创建它的实例。在初始化persistentContainer的时候，我们通过参数指定包含实体数据的数据模型。项目中的实体名称为Item，它包含两个属性title和done，然后通过loadPersistentStores() 方法载入DataModel。  
 
 在控制器中通过persistentContainer获取viewContext属性以后，就可以操作这个临时区域了。为了可以将一个新的数据添加到实体，我们创建了一个新的Item类型对象let newItem = Item（context: self.context）。Item类是在Data Model编辑器中创建实体的时候，由Core Data自动生成的。通过Item类，我们可以直接访问数据对象的属性，比如title和done。Item对象是NSManagedObject类型，NSManagedObject对象实际上就是实体表中一行独立的记录。  
 
-在完成了Item对象的赋值以后，需要调用context的save（）方法将临时区域中的数据存储到persistentContainer中。  
+在完成了Item对象的赋值以后，需要调用context的save() 方法将临时区域中的数据存储到persistentContainer中。  
 
 ### 13.5.5 从Core Data读取、修改和删除数据  
 
@@ -1087,7 +1087,7 @@ newItem.done = false  // 让done属性的默认值为false
 
 - 实战：从Core Data中读取数据。  
 
-步骤1：修改TodoListViewController类的loadItems（）方法。  
+步骤1：修改TodoListViewController类的loadItems() 方法。  
 ```swift
 func loadItems() {
   let request: NSFetchRequest<Item> = Item.fetchRequest()
@@ -1097,7 +1097,7 @@ func loadItems() {
 
 在声明request的时候，我们必须明确给出实体的数据类型，这代表该请求会得到一批Item类型的对象。  
 
-步骤2：继续修改loadItems（）方法。
+步骤2：继续修改loadItems() 方法。
 
     func loadItems() {
       let request: NSFetchRequest<Item> = Item.fetchRequest()
@@ -1108,14 +1108,14 @@ func loadItems() {
         print("从context获取数据错误：\(error)")
       }
     }
-通过context的fetch（）方法，执行上面定义的搜索请求。
-步骤3：在viewDidLoad（）方法的最后，添加对loadItems（）方法的调用。
+通过context的fetch() 方法，执行上面定义的搜索请求。
+步骤3：在viewDidLoad() 方法的最后，添加对loadItems() 方法的调用。
 构建并运行项目，在应用启动以后可以看到数据呈现到表格视图之中，如图13-36所示。  
 
 ![](snapshot/Ch1336.jpeg)  
 图13-36 读取Core Data中的数据  
 
-接下来，我们要实现修改Core Data中数据的操作。本项目中修改数据最理想的地方是在didSelectRowAt（）方法里面。
+接下来，我们要实现修改Core Data中数据的操作。本项目中修改数据最理想的地方是在didSelectRowAt() 方法里面。
 ```swift
 override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath) {
   itemArray[indexPath.row].done = ! itemArray[indexPath.row].done
@@ -1131,11 +1131,11 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:Index
   tableView.deselectRow(at: indexPath, animated: true)
 }
 ```
-当用户单击某个事项以后，会在该事项title的结尾加上-（已完成）字符串。相关的改动只会影响到context区域，直到调用save（）指令前，所有的修改都不会影响到persistentContainer。  
+当用户单击某个事项以后，会在该事项title的结尾加上-（已完成）字符串。相关的改动只会影响到context区域，直到调用save() 指令前，所有的修改都不会影响到persistentContainer。  
 
 目前的代码只是让大家了解如何通过Core Data修改数据，故现在应将新添加的代码注释掉。  
 
-另外，如果要删除实体中的某个对象，我们可以利用content的delete（）方法。  
+另外，如果要删除实体中的某个对象，我们可以利用content的delete() 方法。  
 ```swift
 override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath:IndexPath) {
 
@@ -1145,7 +1145,7 @@ override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath
 }
 ```  
 
-当用户单击事项以后，可以通过delete（）方法直接删除该NSManagedObject对象，然后再从itemArray数组中移除该对象。同样，在执行save（）方法之前，所有的删除操作都是在临时区域实现的。  
+当用户单击事项以后，可以通过delete() 方法直接删除该NSManagedObject对象，然后再从itemArray数组中移除该对象。同样，在执行save() 方法之前，所有的删除操作都是在临时区域实现的。  
 
 为了继续后面的学习，我们还是先将和删除相关的两行代码注释掉。  
 
@@ -1164,7 +1164,7 @@ override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath
 ```swift
 class TodoListViewController: UITableViewController, UISearchBarDelegate {
 ```
-还记得之前我们往往会在viewDidLoad（）方法中添加对delegate属性赋值的语句吗？这里我们可以使用类似searchBar.delegate = self语句来设置delegate的值。但是还有另外一种方法可以实现对delegate属性的设置。  
+还记得之前我们往往会在viewDidLoad() 方法中添加对delegate属性赋值的语句吗？这里我们可以使用类似searchBar.delegate = self语句来设置delegate的值。但是还有另外一种方法可以实现对delegate属性的设置。  
 
 步骤3：在Main.storyboard中选中searchBar，按住鼠标右键，并拖曳其到上方的黄色图标，该图标代表当前的视图控制器。在弹出的Outlets快捷菜单中选择delegate，这样就相当于将searchBar的delegate属性值设置为当前的控制器对象，如图13-38所示。  
 
@@ -1191,7 +1191,7 @@ extension TodoListViewController: UISearchBarDelegate {
 
 使用扩展的好处在于我们在一个类文件中可以创建多个扩展，每个扩展都与一种协议相关，这样所涉及的委托方法都会相对独立，增加代码的可读性并且便于维护。  
 
-步骤3：在searchBarSearchButtonClicked（）方法中添加下面的代码。  
+步骤3：在searchBarSearchButtonClicked() 方法中添加下面的代码。  
 ```swift
 func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
   let request: NSFetchRequest<Item> = Item.fetchRequest()
@@ -1228,7 +1228,7 @@ request.sortDescriptors = [sortDescriptor]
 
 这里会对搜索到的Item对象按照title属性增量排序。   
 
-步骤6：最后在方法中添加对Item实体的搜索指令，可以直接复制loadItems（）方法中的代码。  
+步骤6：最后在方法中添加对Item实体的搜索指令，可以直接复制loadItems() 方法中的代码。  
 ```swift
 request.sortDescriptors = [sortDescriptor]
 
@@ -1245,7 +1245,7 @@ tableView.reloadData()
 ![](snapshot/Ch1340.jpeg)  
 图13-40 初步实现搜索栏的功能  
 
-步骤7：继续简化之前searchBarSearchButtonClicked（）方法中的代码。  
+步骤7：继续简化之前searchBarSearchButtonClicked() 方法中的代码。  
 ```swift
 func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
   let request: NSFetchRequest<Item> = Item.fetchRequest()
@@ -1257,7 +1257,7 @@ func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
   loadItems(with: request)
 }
 ```
-同时修改loadItems（）方法为下面这样。  
+同时修改loadItems() 方法为下面这样。  
 ```swift
 func loadItems(with request: NSFetchRequest<Item>) {
   do {
@@ -1270,9 +1270,9 @@ func loadItems(with request: NSFetchRequest<Item>) {
 }
 ```  
 
-在定义loadItems（）方法的时候，参数有两个名称，第一个是对外部所显示的名称with，第二个是方法内部调用的时候所使用的名称。这么做的目的是使代码更加优雅和美观。  
+在定义loadItems() 方法的时候，参数有两个名称，第一个是对外部所显示的名称with，第二个是方法内部调用的时候所使用的名称。这么做的目的是使代码更加优雅和美观。  
 
-步骤8：修改viewDidLoad（）方法。  
+步骤8：修改viewDidLoad() 方法。  
 ```swift
 override func viewDidLoad() {
 super.viewDidLoad()
@@ -1286,9 +1286,9 @@ loadItems(with: request)
 
 - 技巧  
 
-为了方便调用，我们还可以为loadItems（）方法的参数添加一个默认值。修改方法的定义为func loadItems（with request: NSFetchRequest<Item> = Item.fetchRequest（））{。如果在调用的时候不输入参数，该方法就会将搜索请求参数设置为获取全部的Item实体的记录。  
+为了方便调用，我们还可以为loadItems() 方法的参数添加一个默认值。修改方法的定义为func loadItems（with request: NSFetchRequest<Item> = Item.fetchRequest() ）{。如果在调用的时候不输入参数，该方法就会将搜索请求参数设置为获取全部的Item实体的记录。  
 
-通过这样的修改，我们就可以将viewDidLoad（）方法简化为：  
+通过这样的修改，我们就可以将viewDidLoad() 方法简化为：  
 ```swift
 override func viewDidLoad() {
   super.viewDidLoad()
@@ -1316,7 +1316,7 @@ override func viewDidLoad() {
     
 一旦搜索栏中的文字内容发生了变化就会调用该方法。在该方法中，会判断搜索栏中的文字数量是否为0，如果为0则代表搜索栏中的文字被用户清空，或者是单击了右侧的叉号按钮后由系统直接清空。  
 
-如果搜索文字被清空，就让控制器直接调用loadItems（）方法显示所有的事项。  
+如果搜索文字被清空，就让控制器直接调用loadItems() 方法显示所有的事项。  
 
 构建并运行项目，在搜索结束以后单击叉号按钮，让表格视图显示所有的Item实体中的记录，如图13-41所示。  
 
@@ -1335,7 +1335,7 @@ if searchBar.text? .count == 0 {
 
 一旦用户单击搜索栏以后，searchBar就会成为屏幕上的首要响应对象（First Responder）。如果该对象是带有输入功能的控件，虚拟键盘就会自动从屏幕下方滑出。如果我们取消它的首要响应状态，虚拟键盘会自动消失。  
 
-构建并运行项目，在单击叉号按钮以后，虚拟键盘并没有滑出消失，这是为什么呢？在应用程序运行的时候，通过loadItems（）获取所有Item对象是在后台线程运行的，所以我们不能在这里执行任何与前端用户界面相关的代码。  
+构建并运行项目，在单击叉号按钮以后，虚拟键盘并没有滑出消失，这是为什么呢？在应用程序运行的时候，通过loadItems() 获取所有Item对象是在后台线程运行的，所以我们不能在这里执行任何与前端用户界面相关的代码。  
 
 在模拟器中运行TODO应用的时候，单击Debug控制台的暂停按钮，如图13-42所示。  
 
@@ -1489,7 +1489,7 @@ self.categories.append(newCategory)
 ```
 方法中的代码与TodoListViewController类中的极为相似，当用户单击Add按钮以后会在屏幕上呈现一个添加类别对话框，在输入完类别名称并单击添加按钮以后会将创建的Category对象添加到categories数组中，并将结果保存到persistentContainer容器中。  
 
-步骤4：在TodoListViewController类中创建saveCategories（）方法。  
+步骤4：在TodoListViewController类中创建saveCategories() 方法。  
 ```swift
 //MARK: - Table View 数据维护方法
 
@@ -1502,7 +1502,7 @@ func saveCategories() {
   tableView.reloadData()
 }
 ```
-步骤5：继续添加loadCategories（）方法。  
+步骤5：继续添加loadCategories() 方法。  
 ```swift
 func loadCategories() {
   let request: NSFetchRequest<Category> = Category.fetchRequest()
@@ -1516,7 +1516,7 @@ func loadCategories() {
 ```
 该方法中的request的类型是NSFetchRequest，代表想要获取的对象都与Category类型相关。  
 
-步骤6：在viewDidLoad（）方法的最后添加对loadCategories（）方法的调用。  
+步骤6：在viewDidLoad() 方法的最后添加对loadCategories() 方法的调用。  
 
 构建并运行项目，应用启动以后会看到类别列表，只不过目前还没有创建任何的类别。仿照下图的样子，创建四个以上的类别名称。为了测试数据是否被写入persistentContainer，将应用关闭再重新启动，查看是否还会显示所添加的类别，如图13-51所示。  
 
@@ -1526,16 +1526,16 @@ func loadCategories() {
 接下来我们需要实现的是当用户单击购物清单事务以后，屏幕会呈现TodoList控制器的表格视图，并且在表格中列出该类别的所有Item对象。  
 
 - 实战：呈现选中类别的所有事项。  
-步骤1：在CategoryViewController类中，在MARK: - Table View Delegate注释代码的下方添加didSelectRowAt（）方法。  
+步骤1：在CategoryViewController类中，在MARK: - Table View Delegate注释代码的下方添加didSelectRowAt() 方法。  
 ```swift
 override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath:IndexPath) {
   performSegue(withIdentifier: "goToItems", sender: self)
 }
 ```
 当用户单击单元格以后就会调用该方法，你需要借助Segue方法，从Category控制器切换到Todo控制器，Segue的标识为goToItems。
-在调用performSegue（）方法之前，我们还需要做一些准备工作，因为现在Todo-ListViewController需要载入的并不是所有的Item对象，而是用户指定类别的Item对象。  
+在调用performSegue() 方法之前，我们还需要做一些准备工作，因为现在Todo-ListViewController需要载入的并不是所有的Item对象，而是用户指定类别的Item对象。  
 
-步骤2：在didSelectRowAt（）方法的下面添加prepare（）委托方法。  
+步骤2：在didSelectRowAt() 方法的下面添加prepare() 委托方法。  
 ```swift
 override func prepare(for segue: UIStoryboardSegue, sender: Any? ) {
   let destinationVC = segue.destination as! TodoListViewController
@@ -1544,9 +1544,9 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any? ) {
   }
 }
 ```    
-当调用performSegue（）方法并确定执行标识为goToItems的Segue以后，接下来就是执行该方法了。这里首先获取Segue的目标控制器，使用if语句是防止从Category控制器到Todo控制器有多个Segue，只有执行标识为goToItems的Segue的时候才会执行下面的代码。  
+当调用performSegue() 方法并确定执行标识为goToItems的Segue以后，接下来就是执行该方法了。这里首先获取Segue的目标控制器，使用if语句是防止从Category控制器到Todo控制器有多个Segue，只有执行标识为goToItems的Segue的时候才会执行下面的代码。  
 
-步骤3：继续在prepare（）方法中添加下面的代码。  
+步骤3：继续在prepare() 方法中添加下面的代码。  
 ```swift
 if segue.identifier == "goToItems" {
   if let indexPath = tableView.indexPathForSelectedRow {
@@ -1560,7 +1560,7 @@ if segue.identifier == "goToItems" {
 
 需要注意的是，现在在获取Item对象的时候，必须通过selectedCategory属性查找指定类别的事项。  
 
-在Swift语言中，我们可以在声明变量的后面添加一对大括号，然后在内部使用didSet{ …… }关键字加大括号的方式，定义在为selectedCategory赋值的时候需要做什么事情，在这里我们可以调用loadItems（）方法。  
+在Swift语言中，我们可以在声明变量的后面添加一对大括号，然后在内部使用didSet{ …… }关键字加大括号的方式，定义在为selectedCategory赋值的时候需要做什么事情，在这里我们可以调用loadItems() 方法。  
 ```swift
 var selectedCategory: Category? {
   didSet {
@@ -1568,7 +1568,7 @@ var selectedCategory: Category? {
   }
 }
 ```
-因为有了这样的设置，我们可以删除viewDidLoad（）方法中对loadItems（）方法的调用。  
+因为有了这样的设置，我们可以删除viewDidLoad() 方法中对loadItems() 方法的调用。  
 
 步骤5：在UIAlertAction的闭包中，当创建Item对象的时候，我们此时还要为Item的parentCategory赋值，只有这样新创建的Item对象才可能有一个具体的类别。  
 ```swift
@@ -1577,9 +1577,9 @@ newItem.done = false
 // 将selectedCategory的值赋给Item对象的parentCategory关系属性
 newItem.parentCategory = self.selectedCategory
 ```
-构建并运行项目，单击进入某个类别以后，你会发现在TodoList控制器中会显示当前所有的事项。实际上我们当前所创建的所有Item对象都没有parentCategory关联，在TodoListViewController的表格视图中，所有的数据都来自于itemArray数组，itemArray数组的数据则来自于loadItems（）方法。在该方法中我们只是简单地通过fetch（）方法获取Item实体中所有的记录。因此，我们需要在查询数据库的时候进行数据过滤。  
+构建并运行项目，单击进入某个类别以后，你会发现在TodoList控制器中会显示当前所有的事项。实际上我们当前所创建的所有Item对象都没有parentCategory关联，在TodoListViewController的表格视图中，所有的数据都来自于itemArray数组，itemArray数组的数据则来自于loadItems() 方法。在该方法中我们只是简单地通过fetch() 方法获取Item实体中所有的记录。因此，我们需要在查询数据库的时候进行数据过滤。  
 
-步骤6：在loadItems（）方法中添加下面的代码。  
+步骤6：在loadItems() 方法中添加下面的代码。  
 ```swift
 func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
   let  predicate  =  NSPredicate(format:  "parentCategory.name  MATCHES  %@",selectedCategory! .name! )
@@ -1595,16 +1595,16 @@ func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
 ```
 我们通过NSPredicate创建了一个只获取parentCategory.name完全等于selectedCategory. name的记录，也就是与Item关联的Category对象的name要等于从Category控制器传递过来的数据。  
 
-如果此时构建并运行项目的话，在TodoList控制器中，我们根据类别输入几个事项，但是在搜索的时候我们会发现该功能失效了，搜索栏并不能按照我们提供的文字内容去搜索，而只是重新进行了排序。这是因为在searchBarSearchButtonClicked（）方法中，我们通过NSSortDescriptor（）方法对结果进行了排序。  
+如果此时构建并运行项目的话，在TodoList控制器中，我们根据类别输入几个事项，但是在搜索的时候我们会发现该功能失效了，搜索栏并不能按照我们提供的文字内容去搜索，而只是重新进行了排序。这是因为在searchBarSearchButtonClicked() 方法中，我们通过NSSortDescriptor() 方法对结果进行了排序。  
 
-为了可以在loadItems（）方法中只针对selectedCategory提供的类别进行搜索，我们需要在loadItems（）方法中添加第二个参数。  
+为了可以在loadItems() 方法中只针对selectedCategory提供的类别进行搜索，我们需要在loadItems() 方法中添加第二个参数。  
 ```swift
 func  loadItems(with  request:  NSFetchRequest<Item>  =  Item.fetchRequest(),predicate: NSPredicate) {
       ……
 ```        
 我们可以创建request请求，还可以创建谓词，这样在用户进行搜索的时候除了当前的request请求以外，还可以设定其他的条件。  
 
-步骤7：继续完善loadItems（）方法。  
+步骤7：继续完善loadItems() 方法。  
 ```swift
 func  loadItems(with  request:  NSFetchRequest<Item>  =  Item.fetchRequest(),predicate: NSPredicate) {
   let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@",selectedCategory! .name! )
@@ -1616,7 +1616,7 @@ func  loadItems(with  request:  NSFetchRequest<Item>  =  Item.fetchRequest(),pre
 ```  
 在该方法中，我们使用NSCompoundPredicate类的初始化方法将两个甚至多个谓词组合到一起。在当前代码中，我们使用AND逻辑将两个谓词（Predicate）进行连接，也就是筛选出所有谓词都要符合的记录。所以compoundPredicate代表的是在Item实体中找出类别和搜索内容都符合的记录。  
 
-此时编译器会报错：TodoList控制器的两个调用loadItems（）的地方缺少predicate参数。因为当前我们为loadItems（）方法的第一个参数设置了默认值，而第二个参数并没有默认值，现在我们进一步完善该方法。  
+此时编译器会报错：TodoList控制器的两个调用loadItems() 的地方缺少predicate参数。因为当前我们为loadItems() 方法的第一个参数设置了默认值，而第二个参数并没有默认值，现在我们进一步完善该方法。  
 ```swift
 func  loadItems(with  request:  NSFetchRequest<Item>  =  Item.fetchRequest(),predicate: NSPredicate? = nil) {
   let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@",selectedCategory! .name! )
@@ -1636,7 +1636,7 @@ func  loadItems(with  request:  NSFetchRequest<Item>  =  Item.fetchRequest(),pre
   tableView.reloadData()
 }
 ```
-在该方法中，我们先来判断传递进loadItems（）方法的predicate是否有值，如果有则使用NSCompoundPredicate将两个谓词混合到一起。如果没有则获取指定Category的搜索记录。  
+在该方法中，我们先来判断传递进loadItems() 方法的predicate是否有值，如果有则使用NSCompoundPredicate将两个谓词混合到一起。如果没有则获取指定Category的搜索记录。  
 构建并运行项目，在某个类别中搜索指定内容，结果正常，如图13-52所示。  
 
 ![](snapshot/Ch1353.jpeg)  
