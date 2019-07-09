@@ -10,7 +10,7 @@
 
 该应用允许我们创建一个新的事务列表，比如可以创建一个购物清单的任务列表，然后通过一个特殊的颜色区别于其他的事务列表。你可以选择其中的一个列表，然后在这个指定的列表中添加要做的事项条目。在添加了一些事项以后，你会发现这个事项列表会呈现出一个非常漂亮的从浅至深的渐变色，如图13-2所示。
 
-![](snapshot/Ch1301.jpeg)  
+![](snapshot/Ch1302.jpeg)  
 
 图13-2 事项列表中的渐变色  
 
@@ -21,11 +21,16 @@
 ## 13.1 创建UITableViewController的子类
 
 首先，我们需要创建一个Single View App，将Product Name设置为TODO，这里确保Use Core Data处于未勾选的状态，当我们在后面需要使用到Core Data的时候会手动添加该功能。因为在项目之初，所以我们还是要尽可能保持项目架构的精简、整洁和清晰。
+
 另外，在保存项目之前请确保勾选Create Git repository on my Mac，因为在本章我们将会使用不同的方法去连接本地数据。有的时候，我们会在实现了数据连接功能以后再回滚到之前的版本，去对比两种方法的不同。
+
 在创建好新的项目以后，首先我们要在项目设置中取消Deveice Orientation中的Landscape Left和Landscape Right勾选状态，因为我们只想让应用纵向显示。
+
 接下来，我们就要在项目中通过一种全新的方式来创建表格视图控制器。
+
 [插图]实战：在项目中创建表格视图控制器。
-步骤1：在故事板中，从对象库里面拖曳一个新的表格视图控制器（Table View Controller）。迄今为止，我们一直在使用标准的视图控制器（View Controller），这两个控制器从外观上来说还是有很多不同的。如图13-3所示，表格视图控制器自带有一个表格视图、一个Prototype单元格及所有的委托协议。
+
+步骤1：在故事板中，从对象库里面拖曳一个新的表格视图控制器（Table View Controller）。迄今为止，我们一直在使用标准的视图控制器（View Controller），这两个控制器从外观上来说还是有很多不同的。如图13-3所示，表格视图控制器自带有一个表格视图、一个Prototype单元格及所有的委托协议。  
 ![](snapshot/Ch1303.jpeg)  
 图13-3 对象库中的表格视图控制器  
 
@@ -39,10 +44,13 @@
 图13-5 在Attributes Inspector中设置初始控制器  
 
 此时你会发现，目前在故事板中的表格视图控制器并没有连接到项目中的ViewController.swift文件，因为该文件是与之前故事板中被删除的控制器关联的。接下来，我们要将该文件修改为符合表格视图控制器的类文件。
-步骤3：在项目导航中打开ViewController.swift文件，修改ViewController类的声明。为了更加明确，先将类名称修改为TodoListViewController。需要注意的是，这里将其父类修改为UITableViewController，代表该类的父类是UITableViewController。
 
-    class TodoListViewController: UITableViewController {
+步骤3：在项目导航中打开ViewController.swift文件，修改ViewController类的声明。为了更加明确，先将类名称修改为TodoListViewController。需要注意的是，这里将其父类修改为UITableViewController，代表该类的父类是UITableViewController。  
+```swift
+class TodoListViewController: UITableViewController {
+```
 然后，在项目导航中，将ViewController.swift文件名修改为TodoListViewController. swift。
+
 步骤4：回到故事板中，选中表格视图控制器后在Identifier Inspector中将Class设置为TodoListViewController，此时故事板中的用户界面与TodoListViewController代码类建立关联。
 此时Xcode有一个警告错误：Prototype table cells must have reuse identifiers。我们需要为表格视图单元格指定一个标识。
 步骤5：选中Prototype Cell，在Attributes Inspector中将Identifi er设置为ToDoItemCell，警告消失。
