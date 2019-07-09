@@ -54,7 +54,7 @@ class TodoListViewController: UITableViewController {
 步骤4：回到故事板中，选中表格视图控制器后在Identifier Inspector中将Class设置为TodoListViewController，此时故事板中的用户界面与TodoListViewController代码类建立关联。
 此时Xcode有一个警告错误：Prototype table cells must have reuse identifiers。我们需要为表格视图单元格指定一个标识。
 
-步骤5：选中Prototype Cell，在Attributes Inspector中将Identifi er设置为ToDoItemCell，警告消失。
+步骤5：选中Prototype Cell，在Attributes Inspector中将Identifier设置为ToDoItemCell，警告消失。
 
 [插图]提示
 
@@ -66,7 +66,7 @@ class TodoListViewController: UITableViewController {
 
 步骤1：故事板中选中表格控制器视图，菜单中选择Editor/Embed In/Navigation Controller，让其成为导航控制器中的根控制器。
 
-步骤2：选中表格视图控制器顶部的导航栏，在Attributes Inspector中将其Title设置为TODO，如图13-6所示。
+步骤2：选中表格视图控制器顶部的导航栏(Navigation Item)，在Attributes Inspector中将其Title设置为TODO，如图13-6所示。
 ![](snapshot/Ch1306.jpeg)  
 图13-6 修改导航控制器的Title属性  
 
@@ -74,7 +74,8 @@ class TodoListViewController: UITableViewController {
 ![](snapshot/Ch1307.jpeg)  
 图13-7 修改导航栏的Bar Tint属性  
 
-接下来，我们要设置与表格视图控制器相关的代码。因为在故事板中我们从对象库直接创建了表格视图控制器，在代码类中直接设置ToDoListViewController为UITableViewController的子类，所以我们就不用像之前那样单独声明UITableViewDelegate和UITableViewDataSource协议，以及建立与表格视图的IBOutlet关联了。
+接下来，我们要设置与表格视图控制器相关的代码。因为在故事板中我们从对象库直接创建了表格视图控制器，在代码类中直接设置ToDoListViewController为UITableViewController的子类，所以我们就不用像之前那样单独声明UITableViewDelegate和UITableViewDataSource协议，以及建立与表格视图的IBOutlet关联了。  
+
 [插图]实战：设置TodoListViewController类中的代码。
 
 步骤1：在TodoListViewController中创建itemArray数组。
@@ -104,6 +105,7 @@ override func tableView(_ tableView: UITableView, numberOfRowsInSection section:
 构建并运行项目，效果如图13-8所示。  
 ![](snapshot/Ch1308.jpeg)  
 图13-8 在单元格中显示自定义好的事项  
+
 接下来，我们将要实现的是：当用户单击单元格以后，要在调试控制台打印出该单元格的信息，并且当用户单击单元格的时候还可以呈现一个勾选标记。这些功能需要我们实现UITableViewDelegate协议中的方法。
 
 步骤1：在ToDoListViewController类中实现下面的方法。  
@@ -121,37 +123,45 @@ override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath
 
 步骤2：在tableView:didSelectRowAt：方法中添加下面的代码。
 ```swift
-    override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath:IndexPath) {
-      print(itemArray[indexPath.row])
+override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath:IndexPath) {
+  print(itemArray[indexPath.row])
 
-      tableView.deselectRow(at: indexPath, animated: true)
-    }  
+  tableView.deselectRow(at: indexPath, animated: true)
+}  
  ```  
 构建并运行项目，在用户单击单元格以后灰色高亮会逐渐变淡消失，看起来是一个非常不错的用户体验。
+
 接下来，我们要实现的是在单元格中呈现勾选标记，这需要使用一个名为accessory的属性。
+
 步骤3：在故事板中，通过大纲导览视图选中ToDoItemCell，然后在Attributes Inspector中将Accessory设置为Checkmark，此时你会发现单元格的右侧会出现一个勾选标记。我们还是将它设置为默认状态None，如图13-9所示。    
 ![](snapshot/Ch1309.jpeg)  
-图13-9 设置表格视图单元格的Accessory属性    
+图13-9 设置表格视图单元格的Accessory属性  
+  
 步骤4：继续修改tableView: didSelectRowAt：方法中的代码。  
-
-    override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath:IndexPath) {
-	tableView.cellForRow(at: indexPath)? .accessoryType = .checkmark
-      tableView.deselectRow(at: indexPath, animated: true)
-    }
+```swift
+override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath:IndexPath) {
+tableView.cellForRow(at: indexPath)? .accessoryType = .checkmark
+  tableView.deselectRow(at: indexPath, animated: true)
+}
+```
 其中，cellForRow（at indexPath: IndexPath）方法会通过indexPath参数获取到表格视图中指定单元格对象。然后再通过该单元格对象的accessoryType属性设置其属性值为.checkmark。
-如果此时构建并运行项目，当用户单击单元格后确实会出现勾选标记，但是当再次单击的时候却不会有任何变化。所以我们需要借助if语句，进行勾选状态的切换。
 
-    override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath:IndexPath) {
+如果此时构建并运行项目，当用户单击单元格后确实会出现勾选标记，但是当再次单击的时候却不会有任何变化。所以我们需要借助if语句，进行勾选状态的切换。  
+```swift
+override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath:IndexPath) {
 
-      if tableView.cellForRow(at: indexPath)? .accessoryType == .checkmark {
-        tableView.cellForRow(at: indexPath)? .accessoryType = .none
-      }else {
-        tableView.cellForRow(at: indexPath)? .accessoryType = .checkmark
-      }
+  if tableView.cellForRow(at: indexPath)? .accessoryType == .checkmark {
+    tableView.cellForRow(at: indexPath)? .accessoryType = .none
+  }else {
+    tableView.cellForRow(at: indexPath)? .accessoryType = .checkmark
+  }
 
-      tableView.deselectRow(at: indexPath, animated: true)
-    }
+  tableView.deselectRow(at: indexPath, animated: true)
+}
+```
+
 构建并运行项目，我们可以任意切换单元格的选中状态，如图13-10所示。  
+
 ![](snapshot/Ch1310.jpeg)  
 图13-10 完成单元格的勾选效果  
 
