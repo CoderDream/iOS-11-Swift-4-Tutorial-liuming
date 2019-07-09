@@ -30,11 +30,11 @@
 
 - 实战：在项目中创建表格视图控制器。
 
-步骤1：在故事板中，从对象库里面拖曳一个新的表格视图控制器（Table View Controller）。迄今为止，我们一直在使用标准的视图控制器（View Controller），这两个控制器从外观上来说还是有很多不同的。如图13-3所示，表格视图控制器自带有一个表格视图、一个Prototype单元格及所有的委托协议。  
+步骤1：在故事板中，从对象库里面拖曳一个新的表格视图控制器(Table View Controller) 。迄今为止，我们一直在使用标准的视图控制器(View Controller) ，这两个控制器从外观上来说还是有很多不同的。如图13-3所示，表格视图控制器自带有一个表格视图、一个Prototype单元格及所有的委托协议。  
 ![](snapshot/Ch1303.jpeg)  
 图13-3 对象库中的表格视图控制器  
 
-步骤2：在故事板中将之前指向视图控制器的箭头拖曳到表格视图控制器。箭头指向的控制器代表初始视图控制器（initial view controller），也就意味着一旦应用启动，该控制器的视图就会呈现到屏幕上，如图13-4所示。
+步骤2：在故事板中将之前指向视图控制器的箭头拖曳到表格视图控制器。箭头指向的控制器代表初始视图控制器(initial view controller) ，也就意味着一旦应用启动，该控制器的视图就会呈现到屏幕上，如图13-4所示。
 ![](snapshot/Ch1304.jpeg)  
 图13-4 将表格视图控制器设置为初始控制器  
 
@@ -58,7 +58,7 @@ class TodoListViewController: UITableViewController {
 
 - 提示
 
-如果在故事板中不方便选中Prototype Cell对象，则可以借助大纲导览视图（Document Outline）中的列表项选取表格视图中的单元格。
+如果在故事板中不方便选中Prototype Cell对象，则可以借助大纲导览视图(Document Outline) 中的列表项选取表格视图中的单元格。
 
 接下来，让我们对用户界面做一些修改。
 
@@ -117,7 +117,7 @@ override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath
 ```
 
 该方法用于告诉控制器用户单击了表格视图中的哪个单元格，我们通过indexPath参数得到该信息。
-构建并运行项目，如果单击了第一个单元格，则控制台会显示0。如果想要打印单元格中的内容，因为它与itemArray数组中的元素一致，所以只需要将打印语句修改为print（itemArray[indexPath.row]）即可。
+构建并运行项目，如果单击了第一个单元格，则控制台会显示0。如果想要打印单元格中的内容，因为它与itemArray数组中的元素一致，所以只需要将打印语句修改为print(itemArray[indexPath.row]) 即可。
 
 目前，当用户单击单元格以后，被选中的单元格就会呈现灰色的高亮状态。我们需要换一种呈现方式。  
 
@@ -144,7 +144,7 @@ tableView.cellForRow(at: indexPath)? .accessoryType = .checkmark
   tableView.deselectRow(at: indexPath, animated: true)
 }
 ```
-其中，cellForRow（at indexPath: IndexPath）方法会通过indexPath参数获取到表格视图中指定单元格对象。然后再通过该单元格对象的accessoryType属性设置其属性值为.checkmark。
+其中，cellForRow(at indexPath: IndexPath) 方法会通过indexPath参数获取到表格视图中指定单元格对象。然后再通过该单元格对象的accessoryType属性设置其属性值为.checkmark。
 
 如果此时构建并运行项目，当用户单击单元格后确实会出现勾选标记，但是当再次单击的时候却不会有任何变化。所以我们需要借助if语句，进行勾选状态的切换。  
 ```swift
@@ -204,12 +204,12 @@ override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath
   present(alert, animated: true, completion: nil)
 }
 ```  
-当用户单击+按钮以后，会执行addButtonPressed（_ sender: UIBarButtonItem）方法。在该方法中，我们会创建一个UIAlertController类型的对象，并设置警告对话框的标题为“添加一个新的ToDo项目”，风格为．alert类型，如图13-13所示。UIAlertController警告对话框一共有两种风格：Alert和ActionSheet。第一种风格会出现在屏幕的中央位置，第二种则会从屏幕底部滑出。  
+当用户单击+按钮以后，会执行addButtonPressed(_ sender: UIBarButtonItem) 方法。在该方法中，我们会创建一个UIAlertController类型的对象，并设置警告对话框的标题为“添加一个新的ToDo项目”，风格为．alert类型，如图13-13所示。UIAlertController警告对话框一共有两种风格：Alert和ActionSheet。第一种风格会出现在屏幕的中央位置，第二种则会从屏幕底部滑出。  
 
 ![](snapshot/Ch1313.jpeg)    
 图13-13 警告对话框的两种风格   
 
-在addButtonPressed（_ sender: UIBarButtonItem）方法中，我们接着创建了UIAlertAction类型的对象，它会在对话框中呈现一个用户可以单击的按钮，一旦用户填写了新的条目信息，就可以单击该按钮。这里设置按钮的风格为default，在单击按钮以后会执行方法中的handler闭包，这里带有一个参数，就是用户单击的这个UIAlertAction对象。在闭包中我们先简单打印一个“成功！”信息到控制台。  
+在addButtonPressed(_ sender: UIBarButtonItem) 方法中，我们接着创建了UIAlertAction类型的对象，它会在对话框中呈现一个用户可以单击的按钮，一旦用户填写了新的条目信息，就可以单击该按钮。这里设置按钮的风格为default，在单击按钮以后会执行方法中的handler闭包，这里带有一个参数，就是用户单击的这个UIAlertAction对象。在闭包中我们先简单打印一个“成功！”信息到控制台。  
 
 后面的代码会将所创建的UIAlertAction对象添加到UIAlertController对话框之中，最后通过present() 方法将警告对话框显示到屏幕上。
 
@@ -222,7 +222,7 @@ override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath
 
 - 实战：在警告对话框中添加文本框。  
 
-步骤1：在addButtonPressed（_ sender: UIBarButtonItem）方法中添加下面的代码。  
+步骤1：在addButtonPressed(_ sender: UIBarButtonItem) 方法中添加下面的代码。  
 ```swift
 @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
 
@@ -242,7 +242,7 @@ override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath
 
 这时，我们需要在方法中声明一个变量，用于存储alertTextField对象，这样在UIAlertAction闭包中就可以随时访问它了。  
 
-步骤2：修改addButtonPressed（_ sender: UIBarButtonItem）方法，通过在方法内部声明一个变量，在UIAlertAction的闭包中就可以访问对话框中的文本框对象。  
+步骤2：修改addButtonPressed(_ sender: UIBarButtonItem) 方法，通过在方法内部声明一个变量，在UIAlertAction的闭包中就可以访问对话框中的文本框对象。  
 ```swift
 @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
 
@@ -301,23 +301,23 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
 在之前的实战练习中，我们实现了添加事务项目的功能。但是当我们的应用在退出以后，就会出现一个Bug。  
 
 我们先来看一下AppDelegate.swift文件，当应用在运行中出现系统级事件的时候就会调用AppDelegate类中的委托方法。
-首先找到didFinishLaunchingWithOptions() 方法，当应用启动的时候会调用该方法。它的调用级别要高于初始（Initial）视图控制器的viewDidLoad() 方法。
+首先找到didFinishLaunchingWithOptions() 方法，当应用启动的时候会调用该方法。它的调用级别要高于初始(Initial) 视图控制器的viewDidLoad() 方法。
 
-在didFinishLaunchingWithOptions() 方法中添加一行打印语句：print（"didFinishLaunchi ngWithOptions"）。  
+在didFinishLaunchingWithOptions() 方法中添加一行打印语句：print("didFinishLaunchi ngWithOptions") 。  
 
 当应用在前台运行的时候，如果有电话打进来就会调用applicationWillResignActive() 方法。在用户选择接听电话后，我们可以在该方法中执行相关指令防止用户数据丢失。比如用户正在应用中填写表单的时候有电话打进来，我们可以在该方法中将数据保存到本地。  
 
 在应用的界面从屏幕上消失的时候就会调用applicationDidEnterBackground() 方法。比如当用户按Home键，或者是打开了另一个不同的应用，这也就意味着我们的应用进入了后台。
 
-在applicationDidEnterBackground() 方法中添加一行打印语句：print（"applicationDidEn terBackground"）。  
+在applicationDidEnterBackground() 方法中添加一行打印语句：print("applicationDidEn terBackground") 。  
 
-还有一个非常重要的方法是applicationWillTerminate() ，当应用被用户或系统终止运行的时候就会调用该方法。在该方法中添加print（"applicationWillTerminate"）语句。
+还有一个非常重要的方法是applicationWillTerminate() ，当应用被用户或系统终止运行的时候就会调用该方法。在该方法中添加print("applicationWillTerminate") 语句。
 
 让我们再次运行项目，观察AppDelegate中各种委托方法的执行顺序。当应用启动以后，在控制台首先会看到didFinishLaunchingWithOptions，该方法会在应用启动后的第一时间运行。当用户单击Home键回到主屏幕以后，在控制台会看到applicationDidEnterBackground。另外，当我们切换到另一个应用的时候也会看到该信息。最后，当系统需要回收宝贵的内存资源，或者是被用户强制退出的时候才会执行applicationWillTerminate() 方法。双击Home键，在iOS应用程序切换选择界面中将TODO项目向上划出屏幕以后，会在控制台看到applicationWillTerminate信息。
 
 每一个应用都有其自己独特的生存期，从应用启动开始，它会出现在屏幕上，然后它可能会退到后台，直到最后资源回收，就像是我们人类的出生——生活——死亡的过程一样。
 
-在我们清楚了上面这些委托方法都是做什么的以后，接下来看一下Bug是如何产生的。在模拟器中启动我们的TODO项目，在添加了一个新的事务项目以后，再将应用终止，你可以想到当再次回到应用的表格视图中时，之前所添加的事务就会消失，因为我们根本没有保存它。所以，这也是我们需要持续本地数据存储（persistent local data storage）的原因。  
+在我们清楚了上面这些委托方法都是做什么的以后，接下来看一下Bug是如何产生的。在模拟器中启动我们的TODO项目，在添加了一个新的事务项目以后，再将应用终止，你可以想到当再次回到应用的表格视图中时，之前所添加的事务就会消失，因为我们根本没有保存它。所以，这也是我们需要持续本地数据存储(persistent local data storage) 的原因。  
 
 让应用终止运行的方法有很多，可以在应用切换界面中向上划出应用程序，如图13-18所示。另外，在更新应用或更新iOS系统的时候，在系统需要回收内存资源的时候都会终止应用程序的运行。  
 
@@ -326,7 +326,7 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
 
 ### 13.3.2 使用UserDefaults实现持续本地数据存储的功能  
 
-在iOS系统中，我们的应用都存在独立的沙箱（sandbox）之中，如图13-19所示。原因是苹果为了确保设备的使用安全。这样可以防止恶意应用获取其他应用所存储的数据（比如网银数据），或者是试图去执行一些非法操作（安卓中的Root）。  
+在iOS系统中，我们的应用都存在独立的沙箱(sandbox) 之中，如图13-19所示。原因是苹果为了确保设备的使用安全。这样可以防止恶意应用获取其他应用所存储的数据(比如网银数据) ，或者是试图去执行一些非法操作(安卓中的Root) 。  
 
 ![](snapshot/Ch1319.jpeg)  
 图13-19 应用程序都存在于自己的安全沙箱之中  
@@ -384,7 +384,7 @@ iOS系统会为每一个应用程序生成一个私有目录，这个目录位�
 
 我们可以通过上面的代码找到应用程序项目所使用的Documents目录，这个目录通常会作为数据持久化保存的位置。
 
-因为应用是在沙箱（sandbox）中的，在文件读写权限上会受到限制，因此只能在下面几个目录下读写文件：  
+因为应用是在沙箱(sandbox) 中的，在文件读写权限上会受到限制，因此只能在下面几个目录下读写文件：  
 - Documents：应用中用户数据可以放在这里，iTunes备份和恢复的时候会包括此目录。
 - tmp：存放临时文件，iTunes不会备份和恢复此目录，此目录下的文件可能会在应用退出后删除。
 - Library/Caches：存放缓存文件，iTunes不会备份此目录，此目录下的文件不会在应用退出后被删除。
@@ -574,7 +574,7 @@ override func viewDidLoad() {
 
 步骤5：在cellForRowAt() 方法中将cell.textLabel? .text = itemArray[indexPath.row]修改为cell.textLabel? .text = itemArray[indexPath.row].title，因为通过itemArray[indexPath.row]代码只能获取到Item对象，所以需要借助．title获取事务名称。  
 
-步骤6：在addButtonPressed（_ sender: UIBarButtonItem）方法中，修改UIAlertAction闭包中的代码。  
+步骤6：在addButtonPressed(_ sender: UIBarButtonItem) 方法中，修改UIAlertAction闭包中的代码。  
 ```swift
 let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
   // 用户单击添加项目按钮以后要执行的代码
@@ -620,7 +620,7 @@ return cell
 ```
 当表格视图中的单元格需要刷新的时候，根据Item对象的done属性值来设置单元格的勾选状态。  
 - 提示  
-如果你愿意，可以在该方法中添加一个print语句：print（“更新第：\（indexPath. row）行”），我们可以在控制台查看单元格的更新状态。  
+如果你愿意，可以在该方法中添加一个print语句：print(“更新第：\(indexPath. row) 行”) ，我们可以在控制台查看单元格的更新状态。  
 
 构建并运行项目，单击单元格以后可以看到修改后的效果。  
 
@@ -661,7 +661,7 @@ return cell
 
 #### 13.3.6 UserDefaults的弊端
 
-接下来，我们需要尝试着使用UserDefaults将Item对象保存到本地磁盘之中。在项目之中，我们在UIAlertAction的闭包中使用self.defaults.set（self.itemArray, forKey:"ToDoListArray"）代码将itemArray存储到UserDefaults中。  
+接下来，我们需要尝试着使用UserDefaults将Item对象保存到本地磁盘之中。在项目之中，我们在UIAlertAction的闭包中使用self.defaults.set(self.itemArray, forKey:"ToDoListArray") 代码将itemArray存储到UserDefaults中。  
 
 当你构建并运行项目的时候会发现，当我们添加完一个事务以后，应用程序发生了崩溃。通过控制台打印的日志我们可以发现，User Defaults在试图设置非property-list的对象。  
 ```
@@ -699,7 +699,7 @@ EE243D9-8088-8FB-04E-564773D5D88/data/Containers/Data/Application/CAA88251-FF23-
 ```
 在上面的信息中，因为没有拆包可选的操作，所以会显示为Optional() 的形式。在finder中直接导航到Documents的文件夹。  
 
-步骤3：删除TodoListViewController类中的UserDefaults变量的声明，然后修改之前的let dataFilePath代码为let dataFilePath = FileManager.default.urls（for: .documentDirectory, in: .userDomainMask）.first? .appendingPathComponent（"Items.plist"）。
+步骤3：删除TodoListViewController类中的UserDefaults变量的声明，然后修改之前的let dataFilePath代码为let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) .first? .appendingPathComponent("Items.plist") 。
 通过这样的修改，相当于在URL地址的后面添加了一个文件名，最终地址类似于……902C-4E7A4886FEC1/Documents/Items.plist。如果此时运行项目的话，在Documents文件夹中并不会存在该文件，目前只是生成一个地址而已。  
 
 为了可以在类中直接使用dataFilePath地址，我们将dataFilePath调整为ToDoList-ViewController类的一个属性。
@@ -839,7 +839,7 @@ Core Data是苹果开发的操作数据的框架，它可以工作在关系数�
 ### 13.5.1 设置和配置Core Data
 在之前的项目中，我们通过Codable协议将数据存储到plist文件中，并且能够从该文件中获取数据和添加新的项目。我们先将之前的修改提交到远程仓库中。  
 
-在接下来的几节中，我们将会使用Core Data实现数据库的CRUD操作，即创建（Create）、读取（Read）、更新（Update）和销毁（Destroy）。  
+在接下来的几节中，我们将会使用Core Data实现数据库的CRUD操作，即创建(Create) 、读取(Read) 、更新(Update) 和销毁(Destroy) 。  
 
 首先，我们需要了解如何在项目中设置和配置Core Data的数据模型。之前在创建应用程序项目的时候，我们并没有勾选Use Core Data选项。因为在实际开发过程中，随着项目的推进可能会存在很多的变数。比如在一开始的时候，项目并不需要Core Data来存储数据，你可能打算使用Codable来处理。但是随着项目的推进，你需要将数据进行排序，这就需要使用Core Data的相关功能。  
 
@@ -882,11 +882,11 @@ func saveContext () {
 ![](snapshot/Ch1328.jpeg)  
 图13-28 创建新的Data Model文件  
 
-步骤4：在项目导航中打开AppDelegate.swift文件，在文件的底部将之前CoreDataTest项目中AppDelegate.swift文件底部的两个Core Data方法拷贝过来，并且将NSPersistent Container（name: "CoreDataTest"）修改为NSPersistentContainer（name:"DataModel"），其中DataModel就是我们刚刚添加的Core Data数据模型。  
+步骤4：在项目导航中打开AppDelegate.swift文件，在文件的底部将之前CoreDataTest项目中AppDelegate.swift文件底部的两个Core Data方法拷贝过来，并且将NSPersistent Container(name: "CoreDataTest") 修改为NSPersistentContainer(name:"DataModel") ，其中DataModel就是我们刚刚添加的Core Data数据模型。  
 
 现在我们的TODO项目就如同勾选了Use Core Data选项一样，也具备了Core Data功能。  
 
-步骤5：在项目导航中打开DataModel.xcdatamodeld文件。单击编辑区域底部的Add Entity按钮添加一个实体（Entity），如图13-29所示。实体在一定程度上就相当于类，每个实体都会包含一些属性。实体中的属性就相当于类中的属性。你也可以将实体想象为一个表格的数据，一个Excel工作簿中的表。  
+步骤5：在项目导航中打开DataModel.xcdatamodeld文件。单击编辑区域底部的Add Entity按钮添加一个实体(Entity) ，如图13-29所示。实体在一定程度上就相当于类，每个实体都会包含一些属性。实体中的属性就相当于类中的属性。你也可以将实体想象为一个表格的数据，一个Excel工作簿中的表。  
 
 ![](snapshot/Ch1329.jpeg)  
 图13-29 在DataModel中创建一个实体  
@@ -962,7 +962,7 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
   self.saveItems()
 }
 ```  
-此时的Item类是由Core Data自动生成的，所以需要通过Item（context:）初始化方法将类实例化，这里需要Core Data的context值作为参数。  
+此时的Item类是由Core Data自动生成的，所以需要通过Item(context:) 初始化方法将类实例化，这里需要Core Data的context值作为参数。  
 - 提示  
 在Item上单击鼠标右键，可以看到此时的Item属于NSManagedObject的子类，是由Core Data负责管理的。  
 
@@ -970,7 +970,7 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
 
 我们并不需要在TodoListViewController类中创建context属性，通过AppDelegate. persistentContainer.viewContext便可以获取到它。但是AppDelegate只是一个类，并不是对象，此时我们需要的是AppDelegate对象。  
 
-再通过UIApplication.shared可以获取到当前正在运行的应用实例，由此可见，UIApplication类也是单例模式。该对象中的delegate属性就是实例化的AppDelegate类型的对象，因为目前它的类型为UIApplicationDelegate，所以还需要再使用（UIApplication. shared.delegate as! AppDelegate）语句将其转换为我们的AppDelegate类的实例。  
+再通过UIApplication.shared可以获取到当前正在运行的应用实例，由此可见，UIApplication类也是单例模式。该对象中的delegate属性就是实例化的AppDelegate类型的对象，因为目前它的类型为UIApplicationDelegate，所以还需要再使用(UIApplication. shared.delegate as! AppDelegate) 语句将其转换为我们的AppDelegate类的实例。  
 
 在saveItems() 方法中，我们需要调用context的save() 方法来存储数据，所以将代码修改为：  
 ```swift
@@ -1042,7 +1042,7 @@ newItem.done = false  // 让done属性的默认值为false
 
 在默认情况下，Core Data使用SQLite作为后端数据库。这一节我们就来找出它的位置。  
 
-在viewDidLoad() 方法中添加一条打印语句：print（FileManager.default.urls（for:.document Directory, in: .userDomainMask））。
+在viewDidLoad() 方法中添加一条打印语句：print(FileManager.default.urls(for:.document Directory, in: .userDomainMask) ) 。
 构建并运行项目，找到该应用的Library目录位置，再进入Application Support目录就可以看到DataModel.sqlite文件了，如图13-33所示。接下来就可以利用各种SQLite查看软件将其打开了。  
 
 ![](snapshot/Ch1333.jpeg)  
@@ -1068,16 +1068,16 @@ newItem.done = false  // 让done属性的默认值为false
 
 假设我们的应用一共有Buyers、Products和Orders三个实体，它们都存储在一个永久存储区。这个区域就是persistent container。这个容器中包含了类似SQLite的数据库，以及表与表之间的关系。  
 
-在编写程序代码的时候，我们不能直接与persistent容器交互，必须要通过一个中间件，也就是我们之前接触的context。这个context就是一个临时区域，我们可以在这个区域中创建欲添加到实体中的新记录、欲修改的数据或者是想要删除的数据。这也就是之前说的创建（Create）、读取（Read）、修改（Update）和销毁（Destroy）。  
+在编写程序代码的时候，我们不能直接与persistent容器交互，必须要通过一个中间件，也就是我们之前接触的context。这个context就是一个临时区域，我们可以在这个区域中创建欲添加到实体中的新记录、欲修改的数据或者是想要删除的数据。这也就是之前说的创建(Create) 、读取(Read) 、修改(Update) 和销毁(Destroy) 。  
 
-需要记住的一点是，所有的CRUD操作都要在context中进行，不能直接操作persistent container。另外，你还可以在context中执行取消（Undo）和重做（Redo）操作。最后在提交的时候我们只需要调用context的save() 方法即可，整个过程与GitHub极为相似，如图13-35所示。  
+需要记住的一点是，所有的CRUD操作都要在context中进行，不能直接操作persistent container。另外，你还可以在context中执行取消(Undo) 和重做(Redo) 操作。最后在提交的时候我们只需要调用context的save() 方法即可，整个过程与GitHub极为相似，如图13-35所示。  
 
 ![](snapshot/Ch1335.jpeg)  
 图13-35 应用、Context和Persistent Container之间的关系  
 
 就目前的项目来说，为了可以在控制器类中使用Core Data，我们定义了context属性。每个iOS应用程序都有一个UIApplication类型的对象，通过该对象的delegate属性，便可以获取到AppDelegate的实例，接下来再通过AppDelegate实例获取到该类中的persistentContainer属性。注意，persistentContainer是一个lazy变量，这意味着只有在用到该变量的时候，程序才会为我们创建它的实例。在初始化persistentContainer的时候，我们通过参数指定包含实体数据的数据模型。项目中的实体名称为Item，它包含两个属性title和done，然后通过loadPersistentStores() 方法载入DataModel。  
 
-在控制器中通过persistentContainer获取viewContext属性以后，就可以操作这个临时区域了。为了可以将一个新的数据添加到实体，我们创建了一个新的Item类型对象let newItem = Item（context: self.context）。Item类是在Data Model编辑器中创建实体的时候，由Core Data自动生成的。通过Item类，我们可以直接访问数据对象的属性，比如title和done。Item对象是NSManagedObject类型，NSManagedObject对象实际上就是实体表中一行独立的记录。  
+在控制器中通过persistentContainer获取viewContext属性以后，就可以操作这个临时区域了。为了可以将一个新的数据添加到实体，我们创建了一个新的Item类型对象let newItem = Item(context: self.context) 。Item类是在Data Model编辑器中创建实体的时候，由Core Data自动生成的。通过Item类，我们可以直接访问数据对象的属性，比如title和done。Item对象是NSManagedObject类型，NSManagedObject对象实际上就是实体表中一行独立的记录。  
 
 在完成了Item对象的赋值以后，需要调用context的save() 方法将临时区域中的数据存储到persistentContainer中。  
 
@@ -1131,7 +1131,7 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:Index
   tableView.deselectRow(at: indexPath, animated: true)
 }
 ```
-当用户单击某个事项以后，会在该事项title的结尾加上-（已完成）字符串。相关的改动只会影响到context区域，直到调用save() 指令前，所有的修改都不会影响到persistentContainer。  
+当用户单击某个事项以后，会在该事项title的结尾加上-(已完成) 字符串。相关的改动只会影响到context区域，直到调用save() 指令前，所有的修改都不会影响到persistentContainer。  
 
 目前的代码只是让大家了解如何通过Core Data修改数据，故现在应将新添加的代码注释掉。  
 
@@ -1180,7 +1180,7 @@ class TodoListViewController: UITableViewController, UISearchBarDelegate {
 
 步骤1：删除之前TodoListViewController类的UISearchBarDelegate协议。  
 
-步骤2：在TodoListViewController类的下方，添加一个扩展（extension），然后在扩展中添加一个委托方法。  
+步骤2：在TodoListViewController类的下方，添加一个扩展(extension) ，然后在扩展中添加一个委托方法。  
 
 ```swift
 extension TodoListViewController: UISearchBarDelegate {
@@ -1214,7 +1214,7 @@ func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 }
 ```  
 
-这里创建一个NSPredicate类型的对象，format参数代表查询的谓词，即搜索条件。这里会搜索Item实体中title里面包含（CONTAINS）搜索栏里面的字符的记录，[c]代表不区分大小写。其中%@是通配符，它会被第二个参数的值替代。如果搜索栏中的内容是“拯救”，则format参数的字符串就为“title CONTAINS[c] 拯救”。最后将过滤谓词添加到request搜索请求之中。  
+这里创建一个NSPredicate类型的对象，format参数代表查询的谓词，即搜索条件。这里会搜索Item实体中title里面包含(CONTAINS) 搜索栏里面的字符的记录，[c]代表不区分大小写。其中%@是通配符，它会被第二个参数的值替代。如果搜索栏中的内容是“拯救”，则format参数的字符串就为“title CONTAINS[c] 拯救”。最后将过滤谓词添加到request搜索请求之中。  
 
 如果大家对于谓词过滤语句还不是很熟悉的话，在GitHub的相关资源中为大家提供了一个谓词相关的文档，大家可以轻松查到符合自己需要的查询语句。  
 
@@ -1286,7 +1286,7 @@ loadItems(with: request)
 
 - 技巧  
 
-为了方便调用，我们还可以为loadItems() 方法的参数添加一个默认值。修改方法的定义为func loadItems（with request: NSFetchRequest<Item> = Item.fetchRequest() ）{。如果在调用的时候不输入参数，该方法就会将搜索请求参数设置为获取全部的Item实体的记录。  
+为了方便调用，我们还可以为loadItems() 方法的参数添加一个默认值。修改方法的定义为func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest() ) {。如果在调用的时候不输入参数，该方法就会将搜索请求参数设置为获取全部的Item实体的记录。  
 
 通过这样的修改，我们就可以将viewDidLoad() 方法简化为：  
 ```swift
@@ -1333,7 +1333,7 @@ if searchBar.text? .count == 0 {
 }
 ```  
 
-一旦用户单击搜索栏以后，searchBar就会成为屏幕上的首要响应对象（First Responder）。如果该对象是带有输入功能的控件，虚拟键盘就会自动从屏幕下方滑出。如果我们取消它的首要响应状态，虚拟键盘会自动消失。  
+一旦用户单击搜索栏以后，searchBar就会成为屏幕上的首要响应对象(First Responder) 。如果该对象是带有输入功能的控件，虚拟键盘就会自动从屏幕下方滑出。如果我们取消它的首要响应状态，虚拟键盘会自动消失。  
 
 构建并运行项目，在单击叉号按钮以后，虚拟键盘并没有滑出消失，这是为什么呢？在应用程序运行的时候，通过loadItems() 获取所有Item对象是在后台线程运行的，所以我们不能在这里执行任何与前端用户界面相关的代码。  
 
@@ -1349,7 +1349,7 @@ if searchBar.text? .count == 0 {
 
 一旦在后台完成任务，我们可能需要用这些数据来更新主线程中的用户界面。因此在后台线程中需要先获取主线程，然后才能让虚拟键盘消失。  
 
-步骤3：修改searchBar（_ searchBar: UISearchBar, textDidChange searchText: String）方法为如这样。  
+步骤3：修改searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) 方法为如这样。  
 ```swift
 if searchBar.text? .count == 0 {
   loadItems()
@@ -1429,7 +1429,7 @@ class CategoryViewController: UITableViewController {
 ![](snapshot/Ch1349.jpeg)  
 图13-49 将Category与Item建立关联  
 
-此时在两个实体中会出现关系（Relationships）部分，并且关系名称均为newRelationship，这个名称对于我们来说没有意义。因为每一个Category的记录都会指向多个Item的记录，所以这里我们将Category实体中的关系名称修改为items。另外，因为是指向多个Item，所以在选中Items关系的情况下，在Data Model Inspector中将Type设置为To Many，如图13-50所示。  
+此时在两个实体中会出现关系(Relationships) 部分，并且关系名称均为newRelationship，这个名称对于我们来说没有意义。因为每一个Category的记录都会指向多个Item的记录，所以这里我们将Category实体中的关系名称修改为items。另外，因为是指向多个Item，所以在选中Items关系的情况下，在Data Model Inspector中将Type设置为To Many，如图13-50所示。  
 
 ![](snapshot/Ch1350.jpeg)  
 图13-50 设置实体关系的属性  
@@ -1614,7 +1614,7 @@ func  loadItems(with  request:  NSFetchRequest<Item>  =  Item.fetchRequest(),pre
   request.predicate = compoundPredicate
   ……
 ```  
-在该方法中，我们使用NSCompoundPredicate类的初始化方法将两个甚至多个谓词组合到一起。在当前代码中，我们使用AND逻辑将两个谓词（Predicate）进行连接，也就是筛选出所有谓词都要符合的记录。所以compoundPredicate代表的是在Item实体中找出类别和搜索内容都符合的记录。  
+在该方法中，我们使用NSCompoundPredicate类的初始化方法将两个甚至多个谓词组合到一起。在当前代码中，我们使用AND逻辑将两个谓词(Predicate) 进行连接，也就是筛选出所有谓词都要符合的记录。所以compoundPredicate代表的是在Item实体中找出类别和搜索内容都符合的记录。  
 
 此时编译器会报错：TodoList控制器的两个调用loadItems() 的地方缺少predicate参数。因为当前我们为loadItems() 方法的第一个参数设置了默认值，而第二个参数并没有默认值，现在我们进一步完善该方法。  
 ```swift
