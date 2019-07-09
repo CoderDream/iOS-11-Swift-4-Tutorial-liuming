@@ -53,12 +53,19 @@ class TodoListViewController: UITableViewController {
 
 步骤4：回到故事板中，选中表格视图控制器后在Identifier Inspector中将Class设置为TodoListViewController，此时故事板中的用户界面与TodoListViewController代码类建立关联。
 此时Xcode有一个警告错误：Prototype table cells must have reuse identifiers。我们需要为表格视图单元格指定一个标识。
+
 步骤5：选中Prototype Cell，在Attributes Inspector中将Identifi er设置为ToDoItemCell，警告消失。
+
 [插图]提示
+
 如果在故事板中不方便选中Prototype Cell对象，则可以借助大纲导览视图（Document Outline）中的列表项选取表格视图中的单元格。
+
 接下来，让我们对用户界面做一些修改。
+
 [插图]实战：修改用户界面。
+
 步骤1：故事板中选中表格控制器视图，菜单中选择Editor/Embed In/Navigation Controller，让其成为导航控制器中的根控制器。
+
 步骤2：选中表格视图控制器顶部的导航栏，在Attributes Inspector中将其Title设置为TODO，如图13-6所示。
 ![](snapshot/Ch1306.jpeg)  
 图13-6 修改导航控制器的Title属性  
@@ -69,46 +76,57 @@ class TodoListViewController: UITableViewController {
 
 接下来，我们要设置与表格视图控制器相关的代码。因为在故事板中我们从对象库直接创建了表格视图控制器，在代码类中直接设置ToDoListViewController为UITableViewController的子类，所以我们就不用像之前那样单独声明UITableViewDelegate和UITableViewDataSource协议，以及建立与表格视图的IBOutlet关联了。
 [插图]实战：设置TodoListViewController类中的代码。
+
 步骤1：在TodoListViewController中创建itemArray数组。
+```swift
+let itemArray = ["购买水杯", "吃药", "修改密码"]
+```
+显然，我们利用该数组临时呈现一些事务列表项。  
 
-    let itemArray = ["购买水杯", "吃药", "修改密码"]
-显然，我们利用该数组临时呈现一些事务列表项。
-步骤2：为表格视图创建两个Table View DataSource方法，一个用于返回要显示的单元格对象，另一个则用于显示表格视图有多少行。
+步骤2：为表格视图创建两个Table View DataSource方法，一个用于返回要显示的单元格对象，另一个则用于显示表格视图有多少行。  
+```swift
+//MARK: - Table View DataSource methods
+override  func  tableView(_  tableView:  UITableView,  cellForRowAt  indexPath:IndexPath) -> UITableViewCell {
+  let  cell  =  tableView.dequeueReusableCell(withIdentifier:  "ToDoItemCell",  for:indexPath)
+  cell.textLabel? .text = itemArray[indexPath.row]
 
-    //MARK: - Table View DataSource methods
-    override  func  tableView(_  tableView:  UITableView,  cellForRowAt  indexPath:IndexPath) -> UITableViewCell {
-      let  cell  =  tableView.dequeueReusableCell(withIdentifier:  "ToDoItemCell",  for:indexPath)
-      cell.textLabel? .text = itemArray[indexPath.row]
+  return cell
+}
 
-      return cell
-    }
+override func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
+  return itemArray.count
+}
+```  
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
-      return itemArray.count
-    }
-在cellForRowAt（）方法中，我们首先从表格视图中获取一个可复用的单元格对象，这个单元格的标识为ToDoItemCell，其是和之前在故事板中为Prototype Cell设置的标识一样的单元格。之后设置textLabel的text为数组中相应的元素内容，textLabel是每个单元格对象都会有的内置Label。
+在cellForRowAt（）方法中，我们首先从表格视图中获取一个可复用的单元格对象，这个单元格的标识为ToDoItemCell，其是和之前在故事板中为Prototype Cell设置的标识一样的单元格。之后设置textLabel的text为数组中相应的元素内容，textLabel是每个单元格对象都会有的内置Label。  
+
 在numberOfRowsInSection（）方法中，直接返回itemArray数组的元素个数作为单元格的数量。
 构建并运行项目，效果如图13-8所示。  
 ![](snapshot/Ch1308.jpeg)  
 图13-8 在单元格中显示自定义好的事项  
 接下来，我们将要实现的是：当用户单击单元格以后，要在调试控制台打印出该单元格的信息，并且当用户单击单元格的时候还可以呈现一个勾选标记。这些功能需要我们实现UITableViewDelegate协议中的方法。
 
-步骤1：在ToDoListViewController类中实现下面的方法。
+步骤1：在ToDoListViewController类中实现下面的方法。  
+```swift
+//MARK: - Table View Delegate methods
+override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath:IndexPath) {
+  print(indexPath.row)
+}
+```
 
-    //MARK: - Table View Delegate methods
-    override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath:IndexPath) {
-      print(indexPath.row)
-    }
 该方法用于告诉控制器用户单击了表格视图中的哪个单元格，我们通过indexPath参数得到该信息。
 构建并运行项目，如果单击了第一个单元格，则控制台会显示0。如果想要打印单元格中的内容，因为它与itemArray数组中的元素一致，所以只需要将打印语句修改为print（itemArray[indexPath.row]）即可。
-目前，当用户单击单元格以后，被选中的单元格就会呈现灰色的高亮状态。我们需要换一种呈现方式。
-步骤2：在tableView:didSelectRowAt：方法中添加下面的代码。
 
+目前，当用户单击单元格以后，被选中的单元格就会呈现灰色的高亮状态。我们需要换一种呈现方式。  
+
+步骤2：在tableView:didSelectRowAt：方法中添加下面的代码。
+```swift
     override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath:IndexPath) {
       print(itemArray[indexPath.row])
 
       tableView.deselectRow(at: indexPath, animated: true)
-    }
+    }  
+ ```  
 构建并运行项目，在用户单击单元格以后灰色高亮会逐渐变淡消失，看起来是一个非常不错的用户体验。
 接下来，我们要实现的是在单元格中呈现勾选标记，这需要使用一个名为accessory的属性。
 步骤3：在故事板中，通过大纲导览视图选中ToDoItemCell，然后在Attributes Inspector中将Accessory设置为Checkmark，此时你会发现单元格的右侧会出现一个勾选标记。我们还是将它设置为默认状态None，如图13-9所示。    
