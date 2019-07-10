@@ -547,7 +547,11 @@ class Item {
 ``` 
 在Item类中，title是字符串类型用于存储事务的名称。done是布尔类型，用于指明是否完成了该事务，这里将它的初始值设置为false，代表该事务没有完成。  
 
-步骤3：回到TodoListViewController.swift文件，首先将itemArray属性修改为var itemArray = [Item]() ，然后修改viewDidLoad() 方法中的代码，修改后如下面的样子。
+步骤3：回到TodoListViewController.swift文件，首先将itemArray属性修改为
+```swift
+var itemArray = [Item]()
+```
+ ，然后修改viewDidLoad() 方法中的代码，修改后如下面的样子。
 ```swift
 override func viewDidLoad() {
   super.viewDidLoad()
