@@ -89,7 +89,7 @@ let itemArray = ["购买水杯", "吃药", "修改密码"]
 //MARK: - Table View DataSource methods
 override  func  tableView(_  tableView:  UITableView,  cellForRowAt  indexPath:IndexPath) -> UITableViewCell {
   let  cell  =  tableView.dequeueReusableCell(withIdentifier:  "ToDoItemCell",  for:indexPath)
-  cell.textLabel? .text = itemArray[indexPath.row]
+  cell.textLabel?.text = itemArray[indexPath.row]
 
   return cell
 }
@@ -140,7 +140,7 @@ override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath
 步骤4：继续修改tableView: didSelectRowAt：方法中的代码。  
 ```swift
 override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath) {
-  tableView.cellForRow(at: indexPath)? .accessoryType = .checkmark
+  tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
   tableView.deselectRow(at: indexPath, animated: true)
 }
 ```
@@ -583,7 +583,7 @@ override func viewDidLoad() {
 ```
 因为我们将itemArray从字符串数组修改为itemArray数组，所以接下来有很多的地方需要修改。  
 
-步骤5：在cellForRowAt() 方法中将cell.textLabel? .text = itemArray[indexPath.row]修改为cell.textLabel? .text = itemArray[indexPath.row].title，因为通过itemArray[indexPath.row]代码只能获取到Item对象，所以需要借助.title获取事务名称。  
+步骤5：在cellForRowAt() 方法中将cell.textLabel?.text = itemArray[indexPath.row]修改为cell.textLabel?.text = itemArray[indexPath.row].title，因为通过itemArray[indexPath.row]代码只能获取到Item对象，所以需要借助.title获取事务名称。  
 
 步骤6：在addButtonPressed(_ sender: UIBarButtonItem) 方法中，修改UIAlertAction闭包中的代码。  
 ```swift
@@ -658,7 +658,7 @@ for index in 4...120 {
 在之前的cellForRowAt() 方法中，我们使用if语句，根据单元格的accessoryType的属性值设置勾选状态。下面我们使用一种简单的方法来实现该功能。  
 ```swift
 let item = itemArray[indexPath.row]
-cell.accessoryType = item.done == true ? .checkmark : .none
+cell.accessoryType = item.done == true ?.checkmark : .none
 
 //     if item.done == false {
 //       cell.accessoryType = .none
@@ -716,7 +716,7 @@ EE243D9-8088-8FB-04E-564773D5D88/data/Containers/Data/Application/CAA88251-FF23-
 ```
 在上面的信息中，因为没有拆包可选的操作，所以会显示为Optional() 的形式。在finder中直接导航到Documents的文件夹。  
 
-步骤3：删除TodoListViewController类中的UserDefaults变量的声明，然后修改之前的let dataFilePath代码为let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) .first? .appendingPathComponent("Items.plist") 。  
+步骤3：删除TodoListViewController类中的UserDefaults变量的声明，然后修改之前的let dataFilePath代码为let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask) .first?.appendingPathComponent("Items.plist") 。  
 
 通过这样的修改，相当于在URL地址的后面添加了一个文件名，最终地址类似于……902C-4E7A4886FEC1/Documents/Items.plist。如果此时运行项目的话，在Documents文件夹中并不会存在该文件，目前只是生成一个地址而已。  
 
@@ -725,7 +725,7 @@ EE243D9-8088-8FB-04E-564773D5D88/data/Containers/Data/Application/CAA88251-FF23-
 class TodoListViewController: UITableViewController {
   var itemArray = [Item]()
   let dataFilePath = FileManager.default.urls(for: .documentDirectory,  
-    in:.userDomainMask).first? .appendingPathComponent("Items.plist")
+    in:.userDomainMask).first?.appendingPathComponent("Items.plist")
 ```  
 
 步骤4：在UIAlertAction的闭包中，我们需要借助PropertyListEncoder类对itemArray数组进行编码。  
@@ -1167,8 +1167,7 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:Index
 
 另外，如果要删除实体中的某个对象，我们可以利用content的delete() 方法。  
 ```swift
-override  func  tableView(_  tableView:  UITableView,  didSelectRowAt  indexPath:IndexPath) {
-
+override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath) {
   context.delete(itemArray[indexPath.row])
   itemArray.remove(at: indexPath.row)
   ……
@@ -1305,12 +1304,12 @@ func loadItems(with request: NSFetchRequest<Item>) {
 步骤8：修改viewDidLoad() 方法。   
 ```swift
 override func viewDidLoad() {
-super.viewDidLoad()
-
-print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-
-let request: NSFetchRequest = Item.fetchRequest()
-loadItems(with: request)
+  super.viewDidLoad()
+	
+  print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+	
+  let request: NSFetchRequest = Item.fetchRequest()
+  loadItems(with: request)
 }
 ```  
 
@@ -1338,7 +1337,7 @@ override func viewDidLoad() {
 步骤1：在UISearchBarDelegate扩展类中添加新的委托方法。  
 ```swift
 func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-  if searchBar.text? .count == 0 {
+  if searchBar.text?.count == 0 {
     loadItems()
   }
 }  
@@ -1357,7 +1356,7 @@ func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
 步骤2：在刚才的if语句中再添加一行代码：  
 ```swift
-if searchBar.text? .count == 0 {
+if searchBar.text?.count == 0 {
   loadItems()
   searchBar.resignFirstResponder()
 }
@@ -1381,7 +1380,7 @@ if searchBar.text? .count == 0 {
 
 步骤3：修改searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) 方法为如这样。  
 ```swift
-if searchBar.text? .count == 0 {
+if searchBar.text?.count == 0 {
   loadItems()
 
   DispatchQueue.main.async {
@@ -1491,7 +1490,7 @@ override func tableView(_ tableView: UITableView, numberOfRowsInSection section:
 
 override  func  tableView(_  tableView:  UITableView,  cellForRowAt  indexPath:IndexPath) -> UITableViewCell {
   let  cell  =  tableView.dequeueReusableCell(withIdentifier:  "CategoryCell",  for:indexPath)
-  cell.textLabel? .text = categories[indexPath.row].name
+  cell.textLabel?.text = categories[indexPath.row].name
   return cell
 }
 ```
@@ -1613,7 +1612,7 @@ newItem.parentCategory = self.selectedCategory
 步骤6：在loadItems() 方法中添加下面的代码。  
 ```swift
 func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
-  let  predicate  =  NSPredicate(format:  "parentCategory.name  MATCHES  %@",selectedCategory! .name! )
+  let  predicate  =  NSPredicate(format:  "parentCategory.name  MATCHES  %@",selectedCategory!.name! )
   request.predicate = predicate
   do {
     itemArray = try context.fetch(request)
@@ -1638,7 +1637,7 @@ func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(),predicat
 步骤7：继续完善loadItems() 方法。  
 ```swift
 func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(),predicate: NSPredicate) {
-  let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@",selectedCategory! .name! )
+  let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@",selectedCategory!.name! )
 
   let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates:[categoryPredicate, predicate])
 
@@ -1650,7 +1649,7 @@ func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(),predicat
 此时编译器会报错：TodoList控制器的两个调用loadItems() 的地方缺少predicate参数。因为当前我们为loadItems() 方法的第一个参数设置了默认值，而第二个参数并没有默认值，现在我们进一步完善该方法。  
 ```swift
 func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
-  let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@",selectedCategory! .name! )
+  let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@",selectedCategory!.name! )
 
   if let addtionalPredicate = predicate {
       request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates:[categoryPredicate, addtionalPredicate])
