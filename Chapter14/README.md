@@ -7,7 +7,7 @@
 
 我们将要使用的是Realm的Database功能，在 [https://realm.io/products/realm-database](https://realm.io/products/realm-database) 页面中，我们可以选择项目开发的语言，如图14-1所示。当选择了Swift语言以后，Realm就会带我们到Swift开发文档页面。我们可以在该页面中下载Realm for Swift，或者直接从GitHub下载源码。  
 
-![](snapshot/Ch1401.jpeg) 
+![](snapshot/Ch1401.jpeg)   
 图14-1 Realm Database的主页  
 
 
@@ -100,7 +100,7 @@ do {
 
 构建并运行项目，利用Finder导航到应用的Documents目录中，你可以看到Realm生成的default.realm文件，如图14-2所示。  
 
-![](snapshot/Ch1402.jpeg) 
+![](snapshot/Ch1402.jpeg)   
 图14-2 应用程序中的realm文件  
 
 另外，我们也可以通过Realm.Configuration.defaultConfiguration.fileURL了解Realm文件的具体存储位置。  
@@ -108,7 +108,7 @@ do {
 为了可以查看Realm数据库中的数据，我们可以通过Mac App Store在MacOS中安装Realm Browser，该软件的特点是免费。  
 
 在Realm Browser中，我们可以在左侧的Model中找到Data，右侧是Data的两个属性和一条记录，这条记录是我们在启动应用以后被创建的，如图14-3所示。
-![](snapshot/Ch1403.jpeg) 
+![](snapshot/Ch1403.jpeg)   
 图14-3 在Realm Browser中查看realm文件中的数据
 
 
@@ -129,7 +129,7 @@ func application(_ application: UIApplication,
 ```
 在项目导航中删除之前的Data.swift文件，并创建两个新的swift文件：Item.swift和Category.swift，这两个文件的用途是关联Realm数据库中的两个实体。但是，在DataModel.xcdatamodeld文件中，我们已经为Core Data的两个实体创建了内置的Item和Category类。一旦我们在Item.swift文件中声明Item类，编译器就会报错：不能重复声明Item类，如图14-4所示。  
 
-![](snapshot/Ch1404.jpeg) 
+![](snapshot/Ch1404.jpeg)   
 图14-4 Xcode中Item的报错  
 
 解决的方法非常简单，在DataModel.xcdatamodeld文件中，分别将两个实体的Codegen都设置为Manual/None即可，或者直接删除该文件。  
@@ -233,7 +233,7 @@ func save(category: Category) {
 
 构建并运行项目，在应用启动以后添加同之前一样的几个类别，然后在Realm Browser中打开Realm文件，可以看到图14-5所示的信息。  
 
-![](snapshot/Ch1405.jpeg) 
+![](snapshot/Ch1405.jpeg)   
 图14-5 查看Realm文件中的Category信息  
 
 通过Realm Browser可以发现：当前Category实体中有两个属性，即name是类别的名称，items用于指向每个类别所拥有的item数量，只不过目前还没有任何相关的Item对象。  
@@ -271,7 +271,7 @@ func loadCategories() {
 
 构建并运行项目，可以看到表格中显示的指定信息，尽管当前的categories中没有任何的类别对象，应用也不会发生崩溃。测试完成以后请取消viewDidLoad()方法中的loadCategories()的注释，如图14-6所示。  
 
-![](snapshot/Ch1406.jpeg) 
+![](snapshot/Ch1406.jpeg)   
 图14-6 测试没有事务的情况  
 
 接下来，让我们继续修复TodoList控制器中的问题。  
@@ -302,17 +302,17 @@ func loadItems() {
 
 步骤1：选中itemArray然后右击，在快捷菜单中选择Refactor/Rename，如图14-7所示。  
 
-![](snapshot/Ch1407.jpeg)  
+![](snapshot/Ch1407.jpeg)    
 图14-7 在Xcode中启用Rename功能  
 
 步骤2：在当前位置修改itemArray为todoItems，相关的所有变量名称均会被显式修改，如图14-8所示。  
 
-![](snapshot/Ch1408.jpeg) 
+![](snapshot/Ch1408.jpeg)   
 图14-8 在Xcode中显示欲更名的变量  
 
 步骤3：如果需要修改注释中的变量，则可以单击名称右边的+号，如图14-9所示。  
 
-![](snapshot/Ch1409.jpeg) 
+![](snapshot/Ch1409.jpeg)   
 图14-9 通过Xcode修改变量名称  
 
 步骤4：修改numberOfRowsInSection()方法中的代码为return todoItems.count ? ? 1。  
@@ -355,7 +355,7 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
 ```
 这里先拆包selectedCategory对象，如果有值存在，则创建新的Item对象，并设置它的title属性，以及通过关系属性items将新Item对象添加到关系中。
 构建并运行项目，在事务列表中添加几个事项。另外，在Realm Browser中可以看到与购物清单关联的Item一共有3个，如图14-10所示。
-![](snapshot/Ch1410.jpeg) 
+![](snapshot/Ch1410.jpeg)   
 图14-10 在添加事项以后查看realm文件
 
 ## 14.4 使用Realm修改和移除数据  
@@ -386,7 +386,7 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: Inde
 
 构建并运行项目，切换事项的完成状态，在Realm Browser中可以看到所发生的变化。如果你仔细观看就会发现一旦切换了状态，Realm马上就会发生变化，速度非常快，如图14-11所示。  
 
-![](snapshot/Ch1411.jpeg) 
+![](snapshot/Ch1411.jpeg)   
 图14-11 在应用中修改事项状态以后realm文件变发生了变化  
 
 作为测试，如果想要删除Realm中的某个记录的话，可以直接使用Realm类的delete()方法。例如TodoList控制器类的didSelectRowAt()方法，在realm.write的闭包中修改代码为下面的样子。  
@@ -447,12 +447,12 @@ func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 ```
 构建并运行项目，应用程序运行的时候可能会发生崩溃。单击绿色列表图标，可以查看列出的相关解释信息，如图14-12所示。在应用运行之后，我们调整了Item类，添加了dateCreated属性，而此时Xcode不知道在应用运行的时候要如何处理该属性。  
 
-![](snapshot/Ch1412.jpeg) 
+![](snapshot/Ch1412.jpeg)   
 图14-12 TODO在应用时报错  
 
 最简单的方式是通过Finder导航到Realm文件所在的文件夹，删除与Realm相关的两个文件及一个文件夹。重新构建并运行项目即可。此时的应用中不会有任何的类别与事项，我们需要重新添加相关数据。这时，通过Realm Browser可以在Item类发现新添加的dateCreated属性，如图14-13所示。  
 
-![](snapshot/Ch1413.jpeg) 
+![](snapshot/Ch1413.jpeg)   
 图14-13 删除realm文件后再次运行项目  
 
 ## 14.6 回顾Realm的操作流程  
@@ -498,7 +498,7 @@ Item类同样继承于Object，它包含三个属性，同时我们还指定了�
 
 在CocoaPods主页中搜索SwipeCellKit，通过该项目的GitHub连接，我们可以看到它包含了各种风格的过渡效果，如图14-14所示。  
 
-![](snapshot/Ch1414.jpeg) 
+![](snapshot/Ch1414.jpeg)   
 图14-14 SwipeCellKit介绍  
 
 - 实战：在项目中安装SwipeCellKit。  
@@ -568,12 +568,12 @@ Could not cast value of type 'UITableViewCell' (0x1063f7038) to 'SwipeCellKit.Sw
 
 步骤4：在Main.storyboard中选中Category控制器表格视图里面的单元格，在Identif ier Inspector中，将Class设置为SwipeTableViewCell，将Module设置为SwipeCellKit，因为该单元格类来自于SwipeCellKit框架，如图14-15所示。  
 
-![](snapshot/Ch1415.jpeg) 
+![](snapshot/Ch1415.jpeg)   
 图14-15 设置事务单元格的属性  
 
 构建并运行项目，在Category控制器视图中从右向左拖动鼠标，会出现图14-16所示的效果。    
 
-![](snapshot/Ch1416.jpeg) 
+![](snapshot/Ch1416.jpeg)   
 图14-16 测试SwipeCellKit的执行效果  
 
 当前的问题在于单元格的高度不够，“删除”图标显示不完全。  
@@ -581,7 +581,7 @@ Could not cast value of type 'UITableViewCell' (0x1063f7038) to 'SwipeCellKit.Sw
 步骤5：在viewDidLoad()方法中添加一行代码tableView.rowHeight = 80.0。
 再次构建并运行项目，可以看到完整的图标，如图14-17所示，如果单击删除按钮的话，在控制台会看到通过print语句打印的相关信息。  
 
-![](snapshot/Ch1417.jpeg) 
+![](snapshot/Ch1417.jpeg)   
 图14-17 正确的运行效果  
 
 接下来，我们需要在editActionsForRowAt()方法里面的SwipeAction()的闭包中实现类别删除的代码。  
@@ -622,7 +622,7 @@ func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath:In
 
 在方法中可以为options设置扩展风格(Expansion Style)和过渡风格(Transition Styles)，如图14-18所示。这里我们将会使用扩展的Destructive风格。  
 
-![](snapshot/Ch1418.jpeg) 
+![](snapshot/Ch1418.jpeg)   
 图14-18 SwipeCellKit中的扩展风格  
 
 最后，我们直接将editActionsForRowAt()方法中的tableView.reloadData()代码删除就可以了，因为删除单元格的操作已经由editActionsOptionsForRowAt()方法替我们完成了。  
@@ -708,7 +708,7 @@ pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chamel
 
 构建并运行项目，可以看到图14-19所示的效果。  
 
-![](snapshot/Ch1419.jpeg) 
+![](snapshot/Ch1419.jpeg)   
 图14-19 为TODO添加颜色  
 
 在目前的表格视图中，每个单元格之间都会有一条分割线，在有单元格背景颜色的情况下，我们可以将其取消。  
@@ -771,7 +771,7 @@ let action = UIAlertAction(title: "添加", style: .default) { (action) in
 
 在ChameleonFramework中包含了24种不同颜色的亮暗素材，我们可以在GitHub主页查询到，如图14-20所示。  
 
-![](snapshot/Ch1420.jpeg) 
+![](snapshot/Ch1420.jpeg)   
 图14-20 Chameleon提供的24种渐变色  
 
 - 实战：为事项单元格设置渐变色。  
@@ -808,19 +808,19 @@ if let colour = FlatSkyBlue().darken(byPercentage: CGFloat(indexPath.row/todoIte
 
 构建并运行项目，在TodoList表格中添加一些事项，效果如图14-21所示。  
 
-![](snapshot/Ch1421.jpeg) 
+![](snapshot/Ch1421.jpeg)   
 图14-21 单元格中生成的颜色  
 
 目前，事项中所有的单元格都是同一种颜色，并没有按照我们想象的效果呈现。问题出现在CGFloat(indexPath.row / todoItems.count)一句。虽然我们将计算的结果强制转换为单精度，但是在Swift语言中，整型值(indexPath.row的值)除以整型值(todoItems.count的值)的结果还是整型值，这也就意味着1/5、2/5、3/5……的值都是0, Swift会将结果小数点后面的值去掉，返回一个整型，即便最后将其转换为单精度，结果也是0.0。
 因此，我们需要将byPercentage参数的代码修改为：byPercentage: CGFloat(indexPath.row)/ CGFloat(todoItems.count)，这样生成的才是有效的参数值。
 构建并运行项目，可以看到效果如图14-22所示。  
 
-![](snapshot/Ch1422.jpeg) 
+![](snapshot/Ch1422.jpeg)   
 图14-22 单元格中生成的渐变色  
 
 这里还有一个问题，越来越深的天空蓝色使得我们根本无法看到下面几个单元格的文字内容，其实ChameleonFramework已经为我们提供了相应的解决方案。在GitHub中ChameleonFramework的主页面里找到对比文本(Contrasting Text)部分，如图14-23所示。  
 
-![](snapshot/Ch1423.jpeg) 
+![](snapshot/Ch1423.jpeg)   
 图14-23 Chameleon的对比文本  
 
 简单来说，借助Chameleon我们可以让文字从背景颜色中脱颖而出。  
@@ -838,12 +838,12 @@ if let colour = FlatSkyBlue().darken(byPercentage: CGFloat(indexPath.row)/CGFloa
 通过ContrastColorOf()方法，我们可以得到以colour为背景色的最为合适的文本颜色或者是对比色，returnFlat参数用于确定是否为平涂。
 构建并运行项目，可以看到图14-24所示的效果。  
 
-![](snapshot/Ch1424.jpeg) 
+![](snapshot/Ch1424.jpeg)   
 图14-24 最终的对比文本效果
 
 在当前情况下，所有的文字颜色都是白色，如果我们的背景色是黑白渐变的话，文字颜色也会随着变化。如果你愿意，可以将let colour = FlatSkyBlue()修改为let colour =FlatWhite()，运行效果如图14-25所示。  
 
-![](snapshot/Ch1425.jpeg) 
+![](snapshot/Ch1425.jpeg)   
 图14-25 不同背景的不同对比文本效果  
 
 为了和之前Category控制器中事务单元格的颜色一致，接下来我们将单元格的颜色修改为与事务单元格一致的颜色。  
@@ -851,7 +851,7 @@ if let colour = FlatSkyBlue().darken(byPercentage: CGFloat(indexPath.row)/CGFloa
 将let colour = FlatSkyBlue()代码修改为从Category控制器类传递过来的Category对象的颜色值：let colour = UIColor(hexString: selectedCategory.colour)?。因为selectedCategory是可选的，所以这里使用！将其强制拆包。又因为之前通过if语句将item拆包，所以可以确保selectedCategory值不会为nil。最后的问号则会通过当前的if语句进行拆包，所以这句代码不会发生问题。
 构建并运行项目，可以看到效果如图14-26所示。  
 
-![](snapshot/Ch1426.jpeg) 
+![](snapshot/Ch1426.jpeg)   
 图14-26 TODO项目的运行效果  
 
 因为购物清单单元格的背景色为红色，所以在事项表格中的单元格背景色就是对应的红色由亮到暗。
@@ -863,7 +863,7 @@ if let colour = FlatSkyBlue().darken(byPercentage: CGFloat(indexPath.row)/CGFloa
 
 构建并运行项目，可以看到图14-27所示的效果。  
 
-![](snapshot/Ch1427.jpeg) 
+![](snapshot/Ch1427.jpeg)   
 图14-27 TODO的导航栏设置效果  
 
 接下来，我们将TodoList控制器的导航栏调整为和Category单元格一样的颜色。  
@@ -891,7 +891,7 @@ override func viewDidLoad() {
 
 构建并运行项目，当进入事项界面后应用程序崩溃，如图14-28所示。  
 
-![](snapshot/Ch1428.jpeg) 
+![](snapshot/Ch1428.jpeg)   
 图14-28 导航栏不存在崩溃  
 
 问题的原因就在于导航栏不存在。  
@@ -918,7 +918,7 @@ override func viewWillAppear(_ animated: Bool) {
 这里，我们还设置了title属性为类别的名称，title属性代表的是导航栏中的标题，之前默认值为事项，现在让它显示事务的名称。因为之前已经对selectedCategory拆包，所以直接使用强制拆包即可。
 构建并运行项目，运行效果如图14-29所示。  
 
-![](snapshot/Ch1429.jpeg) 
+![](snapshot/Ch1429.jpeg)   
 图14-29 根据事务颜色设置导航栏颜色  
 
 接下来，我们还需要调整搜索栏的颜色。  
@@ -946,7 +946,7 @@ override func viewWillAppear(_ animated: Bool) {
 因为UIColor(hexString: colourHex)生成的是可选值，所以这里将其拆包，再针对导航栏的颜色以及搜索栏的颜色进行赋值。另外，我们还通过navBar.tintColor设置了导航栏中按钮文字的颜色，这里使用对比色。
 构建并运行项目，运行效果如图14-30所示。  
 
-![](snapshot/Ch1430.jpeg) 
+![](snapshot/Ch1430.jpeg)   
 图14-30 设置搜索栏的颜色  
 
 接下来，我们还要修改导航栏中标题的颜色，因为在故事板中将导航栏设置为Large，所以需要通过largeTitleTextAttributes属性进行设置。继续在viewWillAppear()方法中添加代码。  
@@ -967,7 +967,7 @@ if let navBarColor = UIColor(hexString: colourHex) {
 
 构建并运行项目，运行效果如图14-31所示。  
 
-![](snapshot/Ch1431.jpeg) 
+![](snapshot/Ch1431.jpeg)   
 图14-31 设置导航栏各个元素的颜色  
 
 在viewWillAppear()方法中，我们既使用了if语句又使用了guard语句，那么到底在什么情况下使用if或guard呢？其实并没有什么明确的划分，if语句包含为真时候的语句体、为假时候的语句体，以及其他情况的语句体。而guard则只有在为假的时候才执行其语句体，否则会向下继续执行。  
@@ -1004,6 +1004,6 @@ override  func  tableView(_  tableView:  UITableView,  cellForRowAt  indexPath:I
 
 构建并运行项目，运行效果如图14-32所示。  
 
-![](snapshot/Ch1432.jpeg) 
+![](snapshot/Ch1432.jpeg)   
 图14-32 TODO应用的最终运行效果
 
