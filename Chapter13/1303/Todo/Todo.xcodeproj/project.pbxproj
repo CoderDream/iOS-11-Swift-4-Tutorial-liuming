@@ -58,16 +58,48 @@
 		3F78215D22D4C62F005E47BB /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				3FB6BAFA22D57ED40088420A /* Supporting Files */,
+				3FB6BAF822D57EA80088420A /* Models */,
+				3FB6BAF922D57EB10088420A /* Views */,
+				3FB6BAF722D57E880088420A /* Controllers */,
 				3F78215E22D4C62F005E47BB /* AppDelegate.swift */,
-				3F78216022D4C62F005E47BB /* ViewController.swift */,
-				3F78216222D4C630005E47BB /* Main.storyboard */,
-				3F78216822D4C632005E47BB /* Assets.xcassets */,
-				3F78216A22D4C632005E47BB /* LaunchScreen.storyboard */,
 				3F78216D22D4C632005E47BB /* Info.plist */,
 				3F78216522D4C630005E47BB /* Todo.xcdatamodeld */,
-				3F78217322D4EDF6005E47BB /* Item.swift */,
 			);
 			path = Todo;
+			sourceTree = "<group>";
+		};
+		3FB6BAF722D57E880088420A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3F78216022D4C62F005E47BB /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3FB6BAF822D57EA80088420A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3F78217322D4EDF6005E47BB /* Item.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3FB6BAF922D57EB10088420A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3F78216222D4C630005E47BB /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3FB6BAFA22D57ED40088420A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3F78216822D4C632005E47BB /* Assets.xcassets */,
+				3F78216A22D4C632005E47BB /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

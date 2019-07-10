@@ -48,11 +48,13 @@ class TodoListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for:indexPath)
         cell.textLabel?.text = itemArray[indexPath.row].title
         
-        if itemArray[indexPath.row].done == false {
-            cell.accessoryType = .none
-        }else {
-            cell.accessoryType = .checkmark // MARK: TODO 点击事件有问题
-        }
+//        if itemArray[indexPath.row].done == false {
+//            cell.accessoryType = .none
+//        }else {
+//            cell.accessoryType = .checkmark
+//        }
+        let item = itemArray[indexPath.row]
+        cell.accessoryType = item.done == true ? .checkmark : .none
         
         return cell
     }
@@ -71,11 +73,17 @@ class TodoListViewController: UITableViewController {
         //
         //tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+//        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
+//            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+//        } else {
+//            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+//        }
+        if itemArray[indexPath.row].done == false {
+            itemArray[indexPath.row].done = true
         } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+            itemArray[indexPath.row].done = false
         }
+        
         
         tableView.beginUpdates()
         tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
