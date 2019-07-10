@@ -402,7 +402,7 @@ data/Containers/Data/Application/D2722567-82A1-457C-B57E-7D1D9B9A008F/Documents
 ![](snapshot/Ch1320.jpeg)  
 图13-20 应用程序在自己沙箱中的四个文件夹  
 
-![](snapshot/Ch1353.jp"g)  
+![](snapshot/Ch1353.jpg")  
 图13-53 应用程序在自己沙箱中的四个文件夹(iPhone真机调试)  
 
 因为通过UserDefaults类存储的数据都会保存到Library/Preferences之中，所以我们可以进入该文件夹，你会发现里面有一个类似cn.l iuming.TODO.plist的文件。双击打开它以后会发现里面存储着四个事务项目。其中ToDoListArray就是在set() 方法中定义的键名，其内部包含了四个元素，如图13-21所示。   
@@ -1670,5 +1670,5 @@ func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predica
 在该方法中，我们先来判断传递进loadItems() 方法的predicate是否有值，如果有则使用NSCompoundPredicate将两个谓词混合到一起。如果没有则获取指定Category的搜索记录。  
 构建并运行项目，在某个类别中搜索指定内容，结果正常，如图13-52所示。  
 
-![](snapshot/Ch1353.jpeg)  
+![](snapshot/Ch1352.jpeg)  
 图13-52 实现搜索功能
