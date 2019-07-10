@@ -704,7 +704,8 @@ override func viewDidLoad() {
   super.viewDidLoad()
 
   let dataFilePath = FileManager.default.urls(for: .documentDirectory, in:.userDomainMask).first
-print(dataFilePath)
+  print(dataFilePath)
+}
 ```
 其中，FileManager类用于管理应用中的文件系统，并通过default属性获取该类的实例。由此可见，它是一个单例类。在urls() 方法中，我们需要得到document的路径位置，所以这里使用．documentDirectory，注意在自动完成的列表中还有一个．documentation-Directory的枚举值，一定不要选它，这两个文件夹位置是完全不同的。通过urls() 方法我们会得到一个数组，其中第一个元素就是Document的位置。  
 
@@ -722,10 +723,9 @@ EE243D9-8088-8FB-04E-564773D5D88/data/Containers/Data/Application/CAA88251-FF23-
 为了可以在类中直接使用dataFilePath地址，我们将dataFilePath调整为ToDoList-ViewController类的一个属性。
 ```swift
 class TodoListViewController: UITableViewController {
-
   var itemArray = [Item]()
-
-  let dataFilePath = FileManager.default.urls(for: .documentDirectory,  in:.userDomainMask).first? .appendingPathComponent("Items.plist")
+  let dataFilePath = FileManager.default.urls(for: .documentDirectory,  
+    in:.userDomainMask).first? .appendingPathComponent("Items.plist")
 ```  
 
 步骤4：在UIAlertAction的闭包中，我们需要借助PropertyListEncoder类对itemArray数组进行编码。  
@@ -750,7 +750,7 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
 do {
   let data = try encoder.encode(self.itemArray)
   try data.write(to: self.dataFilePath! )
-}catch {
+} catch {
   print("编码错误：\(error)")
 }
 ```
@@ -777,7 +777,7 @@ func saveItems() {
   do {
     let data = try encoder.encode(itemArray)
     try data.write(to: dataFilePath! )
-  }catch {
+  } catch {
     print("编码错误：\(error)")
   }
 }
@@ -813,7 +813,7 @@ func loadItems() {
     let decoder = PropertyListDecoder()
     do {
       itemArray = try decoder.decode([Item].self, from: data)
-    }catch {
+    } catch {
       print("解码item错误！")
     }
   }
@@ -874,9 +874,7 @@ Core Data是苹果开发的操作数据的框架，它可以工作在关系数�
 步骤2：在项目导航中打开AppDelegate.swift文件，可以看到文件底部有两个新的方法。  
 ```swift
 // MARK: - Core Data stack
-
 lazy var persistentContainer: NSPersistentContainer = {
-
   let container = NSPersistentContainer(name: "CoreDataTest")
   container.loadPersistentStores(completionHandler: { (storeDescription, error) in
     if let error = error as NSError? {
@@ -978,8 +976,7 @@ public class Item: NSManagedObject {
 ```swift
 let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
   // 用户单击添加项目按钮以后要执行的代码
-
-    let  context  =  (UIApplication.shared.delegate  as!  AppDelegate).persistentContainer.viewContext
+  let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
   let newItem = Item(context: context)
 
@@ -1004,9 +1001,9 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
 ```swift
 func saveItems() {
   do {
-      let  context  =  (UIApplication.shared.delegate  as!  AppDelegate).persistentContainer.viewContext
+      let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     try context.save()
-}catch {
+  } catch {
     print("保存context错误：\(error)")
   }
 
@@ -1039,7 +1036,7 @@ class TodoListViewController: UITableViewController {
   func saveItems() {
     do {
       try context.save()
-    }catch {
+    } catch {
       print("保存context错误：\(error)")
     }
 
@@ -1049,7 +1046,7 @@ class TodoListViewController: UITableViewController {
 ```  
 构建并运行项目，添加一个新的事务，在控制台中可以看到相关的数据信息。  
 ```
-保  存context错  误：Error  Domain=NSCocoaErrorDomain  Code=1570  "The  operation couldn't be completed.
+保存context错误：Error  Domain=NSCocoaErrorDomain  Code=1570  "The  operation couldn't be completed.
 (Cocoa error 1570.)"
 UserInfo={NSValidationErrorObject=<TODO.Item: 0x61c000097480> (entity: Item; id:0x61c000227ec0
 <x-coredata:///Item/tD83CE0B3-262C-404B-A94A-DB0D8EE27A8D2> ; data: {
@@ -1133,7 +1130,7 @@ func loadItems() {
 
   do {
     itemArray = try context.fetch(request)
-  }catch {
+  } catch {
     print("从context获取数据错误：\(error)")
   }
 }
@@ -1295,7 +1292,7 @@ func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 func loadItems(with request: NSFetchRequest<Item>) {
   do {
     itemArray = try context.fetch(request)
-  }catch {
+  } catch {
     print("从context获取数据错误：\(error)")
   }
 
