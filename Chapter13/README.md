@@ -1315,7 +1315,11 @@ override func viewDidLoad() {
 
 - 技巧  
 
-为了方便调用，我们还可以为loadItems() 方法的参数添加一个默认值。修改方法的定义为func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest() ) {。如果在调用的时候不输入参数，该方法就会将搜索请求参数设置为获取全部的Item实体的记录。  
+为了方便调用，我们还可以为loadItems() 方法的参数添加一个默认值。修改方法的定义为
+```swift
+func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest() ) {
+```
+。如果在调用的时候不输入参数，该方法就会将搜索请求参数设置为获取全部的Item实体的记录。  
 
 通过这样的修改，我们就可以将viewDidLoad() 方法简化为：  
 ```swift
@@ -1436,8 +1440,10 @@ class CategoryViewController: UITableViewController {
   }
 }
 ```
-接下来，我们需要在DataModel.xcdatamodeld文件中修改数据模型。  
+接下来，我们需要在DataModel.xcdatamodeld文件中修改数据模型。    
+
 - 实战：修改DataModel.xcdatamodeld的数据模型。  
+  
 步骤1：在DataModel.xcdatamodeld中除了可以使用表格式编辑界面外，还可以使用图谱式风格，单击界面右下角的图标即可，如图13-46所示。图谱风格对于经常操作数据库的开发者而言非常的熟悉。基于这种风格，我们将添加一个新的实体。  
 
 ![](snapshot/Ch1346.jpeg)  
@@ -1667,6 +1673,7 @@ func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predica
 }
 ```
 在该方法中，我们先来判断传递进loadItems() 方法的predicate是否有值，如果有则使用NSCompoundPredicate将两个谓词混合到一起。如果没有则获取指定Category的搜索记录。  
+
 构建并运行项目，在某个类别中搜索指定内容，结果正常，如图13-52所示。  
 
 ![](snapshot/Ch1352.jpeg)  
