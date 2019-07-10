@@ -5,7 +5,7 @@
 接着上一章的项目代码，我们将使用Realm来替代Core Data对本地数据进行存储。在正式开始之前，我们先提交当前项目代码到GitHub。
 如果你之前对Realm还不太了解的话，可以直接访问realm.io，通过主页中相关介绍来学习如何使用Realm。在Realm的官网中提供了很多的说明文档以及代码样例。与SQLite和Core Data有所不同，它是开源项目，所以可以深入了解它是如何实现核心功能的。  
 
-我们将要使用的是Realm的Database功能，在https://realm.io/products/realm-database页面中，我们可以选择项目开发的语言，如图14-1所示。当选择了Swift语言以后，Realm就会带我们到Swift开发文档页面。我们可以在该页面中下载Realm for Swift，或者直接从GitHub下载源码。  
+我们将要使用的是Realm的Database功能，在 [https://realm.io/products/realm-database](https://realm.io/products/realm-database) 页面中，我们可以选择项目开发的语言，如图14-1所示。当选择了Swift语言以后，Realm就会带我们到Swift开发文档页面。我们可以在该页面中下载Realm for Swift，或者直接从GitHub下载源码。  
 
 ![](snapshot/Ch1401.jpeg) 
 图14-1 Realm Database的主页  
@@ -66,7 +66,7 @@ class Data: Object {
 ```
 对于一般的数据类来说，这已经足够了。但是作为Realm的数据类，仅仅这样是不行的，我们需要在声明变量的前面加上dynamic关键字。简单点说，即dynamic的意思是该变量是动态的。复杂点说，即dynamic是声明修饰符。大家都知道在几年以前，不管是iOS开发还是MacOS开发所使用的语言都是Objective-C。  
 
-Objective-C和Swift在底层使用的是两套完全不同的机制，Objective-C对象是基于运行时的，它从骨子里遵循了KVC（Key-Value Coding，通过类似字典的方式存储对象信息）以及动态派发（Dynamic Dispatch，在运行调用时再决定实际调用的具体实现）。而Swift为了追求性能，使用的是静态派发（Static Dispatch），如果没有特殊需要的话，是不会在运行时再来决定这些的。也就是说，Swift类型的对象或方法在编译时就已经决定，而运行时便不再需要经过一次查找，可以直接使用。  
+Objective-C和Swift在底层使用的是两套完全不同的机制，Objective-C对象是基于运行时的，它从骨子里遵循了KVC(Key-Value Coding，通过类似字典的方式存储对象信息)以及动态派发(Dynamic Dispatch，在运行调用时再决定实际调用的具体实现)。而Swift为了追求性能，使用的是静态派发(Static Dispatch)，如果没有特殊需要的话，是不会在运行时再来决定这些的。也就是说，Swift类型的对象或方法在编译时就已经决定，而运行时便不再需要经过一次查找，可以直接使用。  
 
 将变量标识为dynamic，就可以允许我们在运行应用的时候监控和改变它。比如，用户可以在应用运行的时候动态改变name这个属性名称，因为Realm在运行的时候可能会根据需要修改数据库结构。  
 
@@ -116,7 +116,8 @@ do {
 
 在介绍如何使用Realm保存数据之前，我们先整理一下之前的didFinishLaunching-With Options()方法。  
 ```swift
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+func application(_ application: UIApplication, 
+    didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
   do {
     let realm = try Realm()
   } catch {
@@ -133,7 +134,8 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 
 解决的方法非常简单，在DataModel.xcdatamodeld文件中，分别将两个实体的Codegen都设置为Manual/None即可，或者直接删除该文件。  
 
-- 实战：为Realm设置两个实体类。
+- 实战：为Realm设置两个实体类。  
+
 步骤1：将Item.swift类修改为下面这样。
 ```swift
 import Foundation
@@ -194,7 +196,7 @@ class CategoryViewController: UITableViewController {
   ……
 ```
 
-在这里我们使用try！来强制实例化Realm，虽然代码得到了简化，但是危险性极高，强烈建议大家在编写自己项目的时候一定要使用do{……}catch{……}的方法，否则可能会出现一些莫名其妙的问题。  
+在这里我们使用try！来强制实例化Realm，虽然代码得到了简化，但是危险性极高，强烈建议大家在编写自己项目的时候一定要使用do{……} catch{……}的方法，否则可能会出现一些莫名其妙的问题。  
 
 步骤2：在Category控制器类的addButtonPressed()方法中，修改创建类别的代码。
 ```swift
@@ -207,16 +209,16 @@ let action = UIAlertAction(title: "添加", style: .default) { (action) in
 }
 ```
 
-这里将原来的Category（context: self.context）修改为Category()，因为现在调用的是RealmSwift框架中的类。  
+这里将原来的Category(context: self.context)修改为Category()，因为现在调用的是RealmSwift框架中的类。  
 
-步骤3：将saveCategories()方法修改为save（category: Category）。  
+步骤3：将saveCategories()方法修改为save(category: Category)。  
 ```swift
 func save(category: Category) {
   do {
     try realm.write {
       realm.add(category)
     }
-  }catch {
+  } catch {
     print("保存Category错误：\(error)")
   }
   tableView.reloadData()
@@ -225,7 +227,7 @@ func save(category: Category) {
 
 每一次在保存的时候，我们都需要传递Category对象到save()方法。  
 
-步骤4：再回到addButtonPressed()方法中，将self.saveCategories()修改为self.save（category: newCategory）。  
+步骤4：再回到addButtonPressed()方法中，将self.saveCategories()修改为self.save(category: newCategory)。  
 
 目前为止，我们已经将创建Category的代码修复完成，为了可以测试创建功能是否正常，我们先注释掉其他所有有问题的代码。  
 
@@ -261,9 +263,9 @@ func loadCategories() {
 
 步骤4：在prepare()方法中，修改destinationVC.selectedCategory = categories [indexPath.row]为destinationVC.selectedCategory = categories? [indexPath.row]，该行的报错消失。  
 
-步骤5：在addButtonPressed()方法中，注释掉self.categories.append（newCategory）。
+步骤5：在addButtonPressed()方法中，注释掉self.categories.append(newCategory)。
 
-步骤6：最后删除没用的let context =（UIApplication.shared.delegate as! AppDelegate）. persistentContainer.viewContext的属性声明。  
+步骤6：最后删除没用的let context =(UIApplication.shared.delegate as! AppDelegate). persistentContainer.viewContext的属性声明。  
 
 为了可以测试在没有类别的时候会显示指定的信息，注释掉viewDidLoad()方法中的loadCategories()。  
 
@@ -344,7 +346,7 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
         newItem.title = textField.text!
         currentCategory.items.append(newItem)
       }
-    }catch {
+    } catch {
       print("保存Item发生错误：\(error)")
     }
   }
@@ -399,7 +401,7 @@ try realm.write {
 
 ## 14.5 使用Realm检索数据  
 
-在前面的章节中已经向大家介绍了如何通过Realm来创建、读取、修改和删除（CRUD）数据。本节我们将会了解如何使用Realm检索数据。  
+在前面的章节中已经向大家介绍了如何通过Realm来创建、读取、修改和删除(CRUD)数据。本节我们将会了解如何使用Realm检索数据。  
 
 步骤1：解除TodoList控制器类的UISearchBarDelegate委托方法的注释。  
 
@@ -474,7 +476,7 @@ do {
 
 对于两个Realm的实体类来说，Category是我们首个创建的Realm对象类，它是Object的子类，我们能够通过它将数据保存到Realm数据库中。在该类中我们定义了name属性，代表类别的名称。dynamic代表可以在应用运行的时候监控属性中值的变化。另外一个是关系属性items，它指定了每个Category都可以有多个Item对象，它的类型是List。  
 
-Item类同样继承于Object，它包含三个属性，同时我们还指定了一个反转关系parentCategory，通过它将每个Item对象与其所属类别连接起来。在创建反转关系的时候，需要指明连接目标的类以及连接目标（Category类）中的关系属性名称（items）。  
+Item类同样继承于Object，它包含三个属性，同时我们还指定了一个反转关系parentCategory，通过它将每个Item对象与其所属类别连接起来。在创建反转关系的时候，需要指明连接目标的类以及连接目标(Category类)中的关系属性名称(items)。  
 
 在Category控制器类中，我们创建了Realm类型的对象，将categories属性从数组变成了新的集合类型——Results，并且出于安全的考虑将其设置为可选。当我们在viewDidLoad()方法中载入所有类别的时候，利用了Realm的objects()方法。在刷新表格视图的时候，如果categories没有值，则让表格只显示一个单元格，否则会依据具体数量显示单元格。我们通过Realm的write()方法来保存新的类别。  
 
@@ -556,7 +558,7 @@ func  tableView(_  tableView:  UITableView,  editActionsForRowAt  indexPath:Inde
 
 在方法的内部，只接受手指从右侧滑动的操作，否则会返回nil。如果用户单击了title为删除的按钮，则会执行闭包中的代码，目前闭包中只有一行注释语句。另外，在方法中还定义了删除按钮的图标为delete，但是现在在该项目中还没有该图标。  
 
-通过提供的资料文件找到Trash-Icon.png文件，并将其添加到项目的Assets.xcassets文件之中，然后修改deleteAction.image = UIImage（named: "delete"）代码为deleteAction.image= UIImage（named: "Trash-Icon"）。
+通过提供的资料文件找到Trash-Icon.png文件，并将其添加到项目的Assets.xcassets文件之中，然后修改deleteAction.image = UIImage(named: "delete")代码为deleteAction.image= UIImage(named: "Trash-Icon")。
 如果此时构建并运行项目的话，应用会崩溃，控制台会打印类似下面的信息。  
 ```
 Could not cast value of type 'UITableViewCell' (0x1063f7038) to 'SwipeCellKit.SwipeTableViewCell' (0x103d5e650).
@@ -590,7 +592,7 @@ let  deleteAction  =  SwipeAction(style:  .destructive,  title: "删除")  {  ac
         try self.realm.write {
         self.realm.delete(categoryForDeletion)
       }
-    }catch {
+    } catch {
       print("删除类别失败：\(error)")
     }
 
@@ -618,7 +620,7 @@ func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath:In
 }
 ```  
 
-在方法中可以为options设置扩展风格（Expansion Style）和过渡风格（Transition Styles），如图14-18所示。这里我们将会使用扩展的Destructive风格。  
+在方法中可以为options设置扩展风格(Expansion Style)和过渡风格(Transition Styles)，如图14-18所示。这里我们将会使用扩展的Destructive风格。  
 
 ![](snapshot/Ch1418.jpeg) 
 图14-18 SwipeCellKit中的扩展风格  
@@ -759,7 +761,7 @@ let action = UIAlertAction(title: "添加", style: .default) { (action) in
 
 这里通过hexValue()方法获取颜色的hex值，它是字符串类型的值。  
 
-步骤3：在cellForRowAt()方法中，添加一行代码：cell.backgroundColor = UIColor（hexString: categories? [indexPath.row].colour ? ? "1D9BF6"）。  
+步骤3：在cellForRowAt()方法中，添加一行代码：cell.backgroundColor = UIColor(hexString: categories? [indexPath.row].colour ? ? "1D9BF6")。  
 
 这样设置单元格的背景色会从Realm的数据表中读取，如果无法获取到Category对象，则会直接设置背景色为1D9BF6。  
 
@@ -809,14 +811,14 @@ if let colour = FlatSkyBlue().darken(byPercentage: CGFloat(indexPath.row/todoIte
 ![](snapshot/Ch1421.jpeg) 
 图14-21 单元格中生成的颜色  
 
-目前，事项中所有的单元格都是同一种颜色，并没有按照我们想象的效果呈现。问题出现在CGFloat（indexPath.row / todoItems.count）一句。虽然我们将计算的结果强制转换为单精度，但是在Swift语言中，整型值（indexPath.row的值）除以整型值（todoItems.count的值）的结果还是整型值，这也就意味着1/5、2/5、3/5……的值都是0, Swift会将结果小数点后面的值去掉，返回一个整型，即便最后将其转换为单精度，结果也是0.0。
-因此，我们需要将byPercentage参数的代码修改为：byPercentage: CGFloat（indexPath.row）/ CGFloat（todoItems.count），这样生成的才是有效的参数值。
+目前，事项中所有的单元格都是同一种颜色，并没有按照我们想象的效果呈现。问题出现在CGFloat(indexPath.row / todoItems.count)一句。虽然我们将计算的结果强制转换为单精度，但是在Swift语言中，整型值(indexPath.row的值)除以整型值(todoItems.count的值)的结果还是整型值，这也就意味着1/5、2/5、3/5……的值都是0, Swift会将结果小数点后面的值去掉，返回一个整型，即便最后将其转换为单精度，结果也是0.0。
+因此，我们需要将byPercentage参数的代码修改为：byPercentage: CGFloat(indexPath.row)/ CGFloat(todoItems.count)，这样生成的才是有效的参数值。
 构建并运行项目，可以看到效果如图14-22所示。  
 
 ![](snapshot/Ch1422.jpeg) 
 图14-22 单元格中生成的渐变色  
 
-这里还有一个问题，越来越深的天空蓝色使得我们根本无法看到下面几个单元格的文字内容，其实ChameleonFramework已经为我们提供了相应的解决方案。在GitHub中ChameleonFramework的主页面里找到对比文本（Contrasting Text）部分，如图14-23所示。  
+这里还有一个问题，越来越深的天空蓝色使得我们根本无法看到下面几个单元格的文字内容，其实ChameleonFramework已经为我们提供了相应的解决方案。在GitHub中ChameleonFramework的主页面里找到对比文本(Contrasting Text)部分，如图14-23所示。  
 
 ![](snapshot/Ch1423.jpeg) 
 图14-23 Chameleon的对比文本  
@@ -846,7 +848,7 @@ if let colour = FlatSkyBlue().darken(byPercentage: CGFloat(indexPath.row)/CGFloa
 
 为了和之前Category控制器中事务单元格的颜色一致，接下来我们将单元格的颜色修改为与事务单元格一致的颜色。  
 
-将let colour = FlatSkyBlue()代码修改为从Category控制器类传递过来的Category对象的颜色值：let colour = UIColor（hexString: selectedCategory.colour）?。因为selectedCategory是可选的，所以这里使用！将其强制拆包。又因为之前通过if语句将item拆包，所以可以确保selectedCategory值不会为nil。最后的问号则会通过当前的if语句进行拆包，所以这句代码不会发生问题。
+将let colour = FlatSkyBlue()代码修改为从Category控制器类传递过来的Category对象的颜色值：let colour = UIColor(hexString: selectedCategory.colour)?。因为selectedCategory是可选的，所以这里使用！将其强制拆包。又因为之前通过if语句将item拆包，所以可以确保selectedCategory值不会为nil。最后的问号则会通过当前的if语句进行拆包，所以这句代码不会发生问题。
 构建并运行项目，可以看到效果如图14-26所示。  
 
 ![](snapshot/Ch1426.jpeg) 
@@ -941,7 +943,7 @@ override func viewWillAppear(_ animated: Bool) {
 }
 ```
 
-因为UIColor（hexString: colourHex）生成的是可选值，所以这里将其拆包，再针对导航栏的颜色以及搜索栏的颜色进行赋值。另外，我们还通过navBar.tintColor设置了导航栏中按钮文字的颜色，这里使用对比色。
+因为UIColor(hexString: colourHex)生成的是可选值，所以这里将其拆包，再针对导航栏的颜色以及搜索栏的颜色进行赋值。另外，我们还通过navBar.tintColor设置了导航栏中按钮文字的颜色，这里使用对比色。
 构建并运行项目，运行效果如图14-30所示。  
 
 ![](snapshot/Ch1430.jpeg) 
