@@ -203,7 +203,7 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:Index
   present(alert, animated: true, completion: nil)
 }
 ```  
-当用户单击+按钮以后，会执行addButtonPressed(_ sender: UIBarButtonItem) 方法。在该方法中，我们会创建一个UIAlertController类型的对象，并设置警告对话框的标题为"添加一个新的ToDo项目"，风格为．alert类型，如图13-13所示。UIAlertController警告对话框一共有两种风格：Alert和ActionSheet。第一种风格会出现在屏幕的中央位置，第二种则会从屏幕底部滑出。  
+当用户单击+按钮以后，会执行addButtonPressed(_ sender: UIBarButtonItem) 方法。在该方法中，我们会创建一个UIAlertController类型的对象，并设置警告对话框的标题为"添加一个新的ToDo项目"，风格为.alert类型，如图13-13所示。UIAlertController警告对话框一共有两种风格：Alert和ActionSheet。第一种风格会出现在屏幕的中央位置，第二种则会从屏幕底部滑出。  
 
 ![](snapshot/Ch1313.jpeg)    
 图13-13 警告对话框的两种风格   
@@ -227,7 +227,7 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:Index
 
   ……
   alert.addTextField { (alertTextField) in
-    alertTextField.placeholder = "创建一个新项目．.."
+    alertTextField.placeholder = "创建一个新项目..."
     print(alertTextField.text! )
   }
 
@@ -256,7 +256,7 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath:Index
   }
 
   alert.addTextField { (alertTextField) in
-    alertTextField.placeholder = "创建一个新项目．.."
+    alertTextField.placeholder = "创建一个新项目..."
     // 让textField指向alertTextField，因为出了闭包，alertTextField不存在
     textField = alertTextField
   }
@@ -366,7 +366,7 @@ let action = UIAlertAction(title: "添加项目", style: .default) { (action) in
 }
 ```
 
-因为是在闭包之中，所以必须要使用self．表示调用的变量和方法都是在类中声明或创建的。通过set() 方法，将itemArray数组存储到UserDefaults中，与其对应的键名为ToDoListArray。
+因为是在闭包之中，所以必须要使用self.表示调用的变量和方法都是在类中声明或创建的。通过set() 方法，将itemArray数组存储到UserDefaults中，与其对应的键名为ToDoListArray。
 
 如果此时构建并运行项目，在添加一个新的事务以后，终止应用再重新开启它，表格中依然只会看到之前的三个事务。这是因为目前在代码中还没有让UserDefaults对象执行保存命令。只有在执行了保存命令以后，通过set() 方法所设置的键/值配对数据才会保存到一个plist格式的文件中。接下来，让我们找到这个文件的位置并看看它的存储格式。
 
@@ -397,7 +397,7 @@ data/Containers/Data/Application/D2722567-82A1-457C-B57E-7D1D9B9A008F/Documents
 
 此时，请再次添加一次拯救世界的事务项目，然后终止应用的运行。
 
-步骤4：在Finder中通过菜单中的前往/前往文件夹．.．选项直接打开Documents文件夹，然后向上返回一级，也就是进入应用程序所在的文件夹，这里是D2722567-82A1-457C-B57E-7D1D9B9A008F。此时我们会看到四个文件夹：Documents、Library、SystemData和tmp，如图13-20所示。   
+步骤4：在Finder中通过菜单中的前往/前往文件夹...选项直接打开Documents文件夹，然后向上返回一级，也就是进入应用程序所在的文件夹，这里是D2722567-82A1-457C-B57E-7D1D9B9A008F。此时我们会看到四个文件夹：Documents、Library、SystemData和tmp，如图13-20所示。   
 
 ![](snapshot/Ch1320.jpeg)  
 图13-20 应用程序在自己沙箱中的四个文件夹  
@@ -583,7 +583,7 @@ override func viewDidLoad() {
 ```
 因为我们将itemArray从字符串数组修改为itemArray数组，所以接下来有很多的地方需要修改。  
 
-步骤5：在cellForRowAt() 方法中将cell.textLabel? .text = itemArray[indexPath.row]修改为cell.textLabel? .text = itemArray[indexPath.row].title，因为通过itemArray[indexPath.row]代码只能获取到Item对象，所以需要借助．title获取事务名称。  
+步骤5：在cellForRowAt() 方法中将cell.textLabel? .text = itemArray[indexPath.row]修改为cell.textLabel? .text = itemArray[indexPath.row].title，因为通过itemArray[indexPath.row]代码只能获取到Item对象，所以需要借助.title获取事务名称。  
 
 步骤6：在addButtonPressed(_ sender: UIBarButtonItem) 方法中，修改UIAlertAction闭包中的代码。  
 ```swift
@@ -669,7 +669,7 @@ cell.accessoryType = item.done == true ? .checkmark : .none
 return cell
 }
 ```
-这里，如果item.done等于true，则会将．checkmark赋值给cell的accessoryType属性，否则会将．none赋值给它。这比起上面注释掉的五行if语句要简单得多，并且更具可读性。  
+这里，如果item.done等于true，则会将.checkmark赋值给cell的accessoryType属性，否则会将.none赋值给它。这比起上面注释掉的五行if语句要简单得多，并且更具可读性。  
 
 - 技巧  
 
@@ -707,7 +707,7 @@ override func viewDidLoad() {
   print(dataFilePath)
 }
 ```
-其中，FileManager类用于管理应用中的文件系统，并通过default属性获取该类的实例。由此可见，它是一个单例类。在urls() 方法中，我们需要得到document的路径位置，所以这里使用．documentDirectory，注意在自动完成的列表中还有一个．documentation-Directory的枚举值，一定不要选它，这两个文件夹位置是完全不同的。通过urls() 方法我们会得到一个数组，其中第一个元素就是Document的位置。  
+其中，FileManager类用于管理应用中的文件系统，并通过default属性获取该类的实例。由此可见，它是一个单例类。在urls() 方法中，我们需要得到document的路径位置，所以这里使用.documentDirectory，注意在自动完成的列表中还有一个.documentation-Directory的枚举值，一定不要选它，这两个文件夹位置是完全不同的。通过urls() 方法我们会得到一个数组，其中第一个元素就是Document的位置。  
 
 构建并运行项目，在控制台中会打印类似下面的信息。  
 ```
@@ -782,7 +782,7 @@ func saveItems() {
   }
 }
 ```
-因为不是在闭包中，所以可以删除方法中的self．语句。  
+因为不是在闭包中，所以可以删除方法中的self.语句。  
 
 步骤8：在UIAlertAction闭包和didSelectRowAt() 方法中调用该方法。  
 ```swift
