@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import CoreData
 import RealmSwift
+import SwipeCellKit
 
 class CategoryViewController: UITableViewController {
     
@@ -21,20 +21,22 @@ class CategoryViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.rowHeight = 100.0
 
         loadCategories()
     }
 
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         var textField = UITextField()
-        print("addButtonPressed")
+        //print("addButtonPressed")
         let alert = UIAlertController(title: "添加新的类别", message: "",preferredStyle: .alert)
         let action = UIAlertAction(title: "添加", style: .default) { (action) in
 //            let newCategory = Category(context: self.context)
 //            newCategory.name = textField.text!
 //            self.categories.append(newCategory)
 //            self.saveCategories()
-            print("添加 action")
+            //print("添加 action")
             let newCategory = Category()
             newCategory.name = textField.text!
             //self.categories.append(newCategory)
@@ -61,11 +63,10 @@ class CategoryViewController: UITableViewController {
 //        tableView.reloadData()
 //    }
     func save(category: Category) {
-        
-        print("save:category")
+        //print("save:category")
         do {
             try realm.write {
-                print("realm.write")
+                //print("realm.write")
                 realm.add(category)
             }
         } catch {
@@ -92,7 +93,8 @@ class CategoryViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for:indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for:indexPath) as! SwipeTableViewCell
+        cell.delegate = self
         cell.textLabel?.text = categories?[indexPath.row].name ?? "没有任何类别"
         print("name: \(String(describing: cell.textLabel?.text))")
         return cell
@@ -110,5 +112,39 @@ class CategoryViewController: UITableViewController {
                 destinationVC.selectedCategory = categories?[indexPath.row]
             }
         }
+    }
+}
+
+// MARK: - Swipe Cell Delegate Methods
+extension CategoryViewController: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else {
+            return nil
+        }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: "删除") { (action, indexPath) in
+            // handle action by updating model with deletion
+            print("类别被删除")
+            if let categoryForDeletion = self.categories?[indexPath.row] {
+                do {
+                    try self.realm.write {
+                        self.realm.delete(categoryForDeletion)
+                    }
+                } catch {
+                    print("删除类别失败： \(error)")
+                }
+                // tableView.reloadData()
+            }
+        }
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "Trash-Icon")
+        
+        return [deleteAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeTableOptions()
+        options.expansionStyle = .destructive
+        return options
     }
 }

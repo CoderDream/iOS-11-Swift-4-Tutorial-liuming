@@ -9,6 +9,7 @@
 import UIKit
 //import CoreData
 import RealmSwift
+import SwipeCellKit
 
 class TodoListViewController: UITableViewController {
     
@@ -62,12 +63,15 @@ class TodoListViewController: UITableViewController {
         //print("\(String(describing: dataFilePath))")
 //        let request: NSFetchRequest = Item.fetchRequest()
 //        loadItems(with: request)
-        //loadItems()
+        loadItems()
+        
+        tableView.rowHeight = 100.0
     }
     
     //MARK: - Table View DataSource methods
     override func tableView(_  tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for:indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for:indexPath) as! SwipeTableViewCell
+        cell.delegate = self
         //cell.textLabel?.text = todoItems[indexPath.row].title
         
 //        if todoItems[indexPath.row].done == false {
@@ -246,5 +250,39 @@ extension TodoListViewController: UISearchBarDelegate {
                 searchBar.resignFirstResponder()
             }
         }
+    }
+}
+
+// MARK: - Swipe Cell Delegate Methods
+extension TodoListViewController: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else {
+            return nil
+        }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: "删除") { (action, indexPath) in
+            // handle action by updating model with deletion
+            print("事项被删除")
+            if let itemForDeletion = self.todoItems?[indexPath.row] {
+                do {
+                    try self.realm.write {
+                        self.realm.delete(itemForDeletion)
+                    }
+                } catch {
+                    print("删除类别失败： \(error)")
+                }
+                // tableView.reloadData()
+            }
+        }
+        // customize the action appearance 自定义单元格在用户滑动后所呈现的外观
+        deleteAction.image = UIImage(named: "Trash-Icon")
+        
+        return [deleteAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeTableOptions()
+        options.expansionStyle = .destructive
+        return options
     }
 }

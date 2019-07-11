@@ -7,6 +7,6 @@ target 'Todo' do
 
   # Pods for News pod update --no-repo-update
   pod 'RealmSwift', '3.15.0'
-  pod 'SwipeCellKit', '2.6.0'
+  pod 'SwipeCellKit', '2.5.4'
 end
 
