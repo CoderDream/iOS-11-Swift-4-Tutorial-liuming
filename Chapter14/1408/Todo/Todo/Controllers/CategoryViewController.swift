@@ -9,15 +9,24 @@
 import UIKit
 import RealmSwift
 import SwipeCellKit
-//import Cha
+import ChameleonFramework
 
 class CategoryViewController: UITableViewController {
     
     //var categories = [Category]()
     var categories: Results<Category>?
     
-    let realm = try! Realm()
+    let realm = try! Realm() // getRealmInstanc()
     
+//    func getRealmInstanc() -> Realm {
+//        do {
+//            let a = try Realm()
+//            return a
+//        } catch {
+//            print("error: \(error)")
+//            // return
+//        }
+//    }
     //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     override func viewDidLoad() {
@@ -40,6 +49,8 @@ class CategoryViewController: UITableViewController {
             //print("添加 action")
             let newCategory = Category()
             newCategory.name = textField.text!
+            // 设置颜色
+            newCategory.colour = UIColor.randomFlat.hexValue()
             //self.categories.append(newCategory)
             self.save(category: newCategory)
         }
@@ -97,6 +108,7 @@ class CategoryViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for:indexPath) as! SwipeTableViewCell
         cell.delegate = self
         cell.textLabel?.text = categories?[indexPath.row].name ?? "没有任何类别"
+        cell.backgroundColor = UIColor(hexString: categories?[indexPath.row].colour ?? "1D9BF6") // UIColor.randomFlat
         print("name: \(String(describing: cell.textLabel?.text))")
         return cell
     }

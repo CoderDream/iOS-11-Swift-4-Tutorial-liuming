@@ -10,6 +10,7 @@ import UIKit
 //import CoreData
 import RealmSwift
 import SwipeCellKit
+import ChameleonFramework
 
 class TodoListViewController: UITableViewController {
     
@@ -28,8 +29,7 @@ class TodoListViewController: UITableViewController {
             loadItems()
         }
     }
-    let realm = try! Realm()
-    
+    let realm = try! Realm()    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +66,7 @@ class TodoListViewController: UITableViewController {
         loadItems()
         
         tableView.rowHeight = 100.0
+        tableView.separatorStyle = .none
     }
     
     //MARK: - Table View DataSource methods
@@ -85,6 +86,12 @@ class TodoListViewController: UITableViewController {
         if let item = todoItems?[indexPath.row] {
             cell.textLabel?.text = item.title
             cell.accessoryType = item.done == true ? .checkmark : .none
+            
+            // 设置单元格的背景颜色
+            if let colour = UIColor(hexString: selectedCategory!.colour)?.darken(byPercentage: CGFloat(indexPath.row)/CGFloat(todoItems!.count)) { // FlatSkyBlue().darken(byPercentage: CGFloat(indexPath.row)/CGFloat(todoItems!.count)) {
+                cell.backgroundColor = colour
+                cell.textLabel?.textColor = ContrastColorOf(colour, returnFlat: true)
+            }
         } else {
             cell.textLabel?.text = "没有事项"
         }

@@ -719,7 +719,6 @@ import ChameleonFramework
 ```swift
 cell.backgroundColor = UIColor.randomFlat
 ```
- 
 
 构建并运行项目，可以看到图14-19所示的效果。  
 
@@ -783,7 +782,7 @@ let action = UIAlertAction(title: "添加", style: .default) { (action) in
 ```swift
 cell.backgroundColor = UIColor(hexString: categories? [indexPath.row].colour ?? "1D9BF6") 
 ``` 
-。  
+
 这样设置单元格的背景色会从Realm的数据表中读取，如果无法获取到Category对象，则会直接设置背景色为1D9BF6。  
 
 构建并运行项目，然后退出再重新进入，类别的颜色不会发生变化。  
@@ -862,14 +861,18 @@ if let colour = FlatSkyBlue().darken(byPercentage: CGFloat(indexPath.row)/CGFloa
 ![](snapshot/Ch1424.jpeg)   
 图14-24 最终的对比文本效果
 
-在当前情况下，所有的文字颜色都是白色，如果我们的背景色是黑白渐变的话，文字颜色也会随着变化。如果你愿意，可以将let colour = FlatSkyBlue()修改为let colour =FlatWhite()，运行效果如图14-25所示。  
+在当前情况下，所有的文字颜色都是白色，如果我们的背景色是黑白渐变的话，文字颜色也会随着变化。如果你愿意，可以将let colour = FlatSkyBlue()修改为let colour = FlatWhite()，运行效果如图14-25所示。  
 
 ![](snapshot/Ch1425.jpeg)   
 图14-25 不同背景的不同对比文本效果  
 
 为了和之前Category控制器中事务单元格的颜色一致，接下来我们将单元格的颜色修改为与事务单元格一致的颜色。  
 
-将let colour = FlatSkyBlue()代码修改为从Category控制器类传递过来的Category对象的颜色值：let colour = UIColor(hexString: selectedCategory.colour)?。因为selectedCategory是可选的，所以这里使用！将其强制拆包。又因为之前通过if语句将item拆包，所以可以确保selectedCategory值不会为nil。最后的问号则会通过当前的if语句进行拆包，所以这句代码不会发生问题。
+将let colour = FlatSkyBlue()代码修改为从Category控制器类传递过来的Category对象的颜色值：  
+```swift
+let colour = UIColor(hexString: selectedCategory!.colour)?
+```  
+因为selectedCategory是可选的，所以这里使用！将其强制拆包。又因为之前通过if语句将item拆包，所以可以确保selectedCategory值不会为nil。最后的问号则会通过当前的if语句进行拆包，所以这句代码不会发生问题。
 构建并运行项目，可以看到效果如图14-26所示。  
 
 ![](snapshot/Ch1426.jpeg)   
