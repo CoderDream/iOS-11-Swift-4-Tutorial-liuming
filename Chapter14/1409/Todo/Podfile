@@ -1,0 +1,13 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '12.1'
+
+target 'Todo' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for News pod update --no-repo-update
+  pod 'RealmSwift', '3.15.0'
+  pod 'SwipeCellKit', '2.5.4'
+  pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git' #, '2.1.0'
+end
+
