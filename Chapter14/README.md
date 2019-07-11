@@ -253,7 +253,15 @@ func loadCategories() {
 
 这里我们使用objects()方法获取指定实体的所有记录。因为它的返回值是Results，所以接下来，我们需要修改在类中声明的categories的类型。  
 
-步骤2：将var categories = [Category]()修改为var categories: Results<Category>?，这代表categories是Results类型，该类型中的结果是Category的对象。注意，categories是可选类型，因为你在第一次运行应用的时候，类别的数量肯定是0。  
+步骤2：将
+```swift
+var categories = [Category]()
+```
+修改为
+```swift
+var categories: Results<Category>?
+```
+，这代表categories是Results类型，该类型中的结果是Category的对象。注意，categories是可选类型，因为你在第一次运行应用的时候，类别的数量肯定是0。  
 
 在这次修改以后，numberOfRowsInSection()方法会报错，因为此时的categories是可选的，我们需要对其做拆包处理。这里我们使用一个全新的方式，将之前的代码修改为return categories.count ?? 1。我们管??叫空合运算符，简单来说就是当??前面的值为nil的时候，表达式的值为??后面的值。如果前面的值不为nil，表达式的值就是前面的值。另外??前面必须是一个可选值。  
 
