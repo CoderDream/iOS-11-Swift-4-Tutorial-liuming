@@ -302,7 +302,7 @@ func loadItems() {
 
 通过selectedCategory的items关系属性可以得到关联的所有Item对象，然后通过sorted()方法将其按title属性排序。  
 
-此时该行会报错：不能将’Results? ’类型的值赋给’[Item]’类型。回到类中声明itemArray的地方，将声明修改为var itemArray: Results<Item>?。  
+此时该行会报错：不能将'Results? '类型的值赋给'[Item]'类型。回到类中声明itemArray的地方，将声明修改为var itemArray: Results<Item>?。  
 
 接下来为大家介绍Xcode编辑器的一个非常亲民的特性——批量替换变量名称。因为现在itemArray存储的不是数组类型，所以需要将它的名称修改为todoItems。  
 
