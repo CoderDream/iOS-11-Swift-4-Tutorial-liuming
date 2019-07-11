@@ -710,9 +710,14 @@ pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chamel
 
 - 实战：为表格设置随机颜色。  
 
-步骤1：在Category控制器类中导入框架import Chameleon Framework。  
-
-步骤2：在cellForRowAt()方法中，添加一行代码：cell.backgroundColor = UIColor.randomFlat。  
+步骤1：在Category控制器类中导入框架  
+```swift
+import Chameleon Framework。  
+```
+步骤2：在cellForRowAt()方法中，添加一行代码：  
+```swift
+cell.backgroundColor = UIColor.randomFlat。  
+```
 
 构建并运行项目，可以看到图14-19所示的效果。  
 
@@ -721,7 +726,10 @@ pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chamel
 
 在目前的表格视图中，每个单元格之间都会有一条分割线，在有单元格背景颜色的情况下，我们可以将其取消。  
 
-步骤3：在Category控制器类的viewDidLoad()方法中，添加一行tableView. separatorStyle = .none代码。  
+步骤3：在Category控制器类的viewDidLoad()方法中，添加一行  
+```swift
+tableView. separatorStyle = .none代码。  
+```  
 
 目前，在Category控制器中显示的类别单元格的背景色都是随机分配的，这也就意味着一旦我们关闭TODO再重新打开它的时候，颜色就会发生变化。如何固定住每个事务单元格的背景颜色呢?我们将会把与事务关联的颜色作为Category实体的属性。  
 
@@ -769,8 +777,10 @@ let action = UIAlertAction(title: "添加", style: .default) { (action) in
 
 这里通过hexValue()方法获取颜色的hex值，它是字符串类型的值。  
 
-步骤3：在cellForRowAt()方法中，添加一行代码：cell.backgroundColor = UIColor(hexString: categories? [indexPath.row].colour ?? "1D9BF6")。  
-
+步骤3：在cellForRowAt()方法中，添加一行代码：  
+```swift
+cell.backgroundColor = UIColor(hexString: categories? [indexPath.row].colour ?? "1D9BF6")。  
+```  
 这样设置单元格的背景色会从Realm的数据表中读取，如果无法获取到Category对象，则会直接设置背景色为1D9BF6。  
 
 构建并运行项目，然后退出再重新进入，类别的颜色不会发生变化。  
