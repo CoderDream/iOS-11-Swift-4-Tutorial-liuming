@@ -714,13 +714,12 @@ pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chamel
 ```swift
 import ChameleonFramework
 ```  
-。  
 
 步骤2：在cellForRowAt()方法中，添加一行代码：  
 ```swift
 cell.backgroundColor = UIColor.randomFlat
 ```
-。    
+ 
 
 构建并运行项目，可以看到图14-19所示的效果。  
 
@@ -729,11 +728,10 @@ cell.backgroundColor = UIColor.randomFlat
 
 在目前的表格视图中，每个单元格之间都会有一条分割线，在有单元格背景颜色的情况下，我们可以将其取消。  
 
-步骤3：在Category控制器类的viewDidLoad()方法中，添加一行  
+步骤3：在Category控制器类的viewDidLoad()方法中，添加一行代码：  
 ```swift
 tableView. separatorStyle = .none
 ```  
-代码。    
 
 目前，在Category控制器中显示的类别单元格的背景色都是随机分配的，这也就意味着一旦我们关闭TODO再重新打开它的时候，颜色就会发生变化。如何固定住每个事务单元格的背景颜色呢?我们将会把与事务关联的颜色作为Category实体的属性。  
 
