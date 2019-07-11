@@ -712,7 +712,7 @@ pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chamel
 
 步骤1：在Category控制器类中导入框架  
 ```swift
-import Chameleon Framework  
+import ChameleonFramework
 ```  
 。  
 
