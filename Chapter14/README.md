@@ -255,11 +255,11 @@ func loadCategories() {
 
 步骤2：将var categories = [Category]()修改为var categories: Results<Category>?，这代表categories是Results类型，该类型中的结果是Category的对象。注意，categories是可选类型，因为你在第一次运行应用的时候，类别的数量肯定是0。  
 
-在这次修改以后，numberOfRowsInSection()方法会报错，因为此时的categories是可选的，我们需要对其做拆包处理。这里我们使用一个全新的方式，将之前的代码修改为return categories.count ? ? 1。我们管？？叫空合运算符，简单来说就是当？？前面的值为nil的时候，表达式的值为？？后面的值。如果前面的值不为nil，表达式的值就是前面的值。另外？？前面必须是一个可选值。  
+在这次修改以后，numberOfRowsInSection()方法会报错，因为此时的categories是可选的，我们需要对其做拆包处理。这里我们使用一个全新的方式，将之前的代码修改为return categories.count ?? 1。我们管??叫空合运算符，简单来说就是当??前面的值为nil的时候，表达式的值为??后面的值。如果前面的值不为nil，表达式的值就是前面的值。另外??前面必须是一个可选值。  
 
-对于return categories.count ? ? 1来说，如果categories为nil，则返回1；不为nil，则返回．count的值。  
+对于return categories.count ?? 1来说，如果categories为nil，则返回1；不为nil，则返回．count的值。  
 
-步骤3：在cellForRowAt()方法中，将cell.textLabel.text = categories[indexPath.row]. name修改为cell.textLabel.text = categories? [indexPath.row].name ? ? “没有任何的类别”。因为考虑到在没有类别的时候，表格视图中指定单元格的数量为1，所以在这种情况下需要设置一个特别的单元格。  
+步骤3：在cellForRowAt()方法中，将cell.textLabel.text = categories[indexPath.row]. name修改为cell.textLabel.text = categories? [indexPath.row].name ?? “没有任何的类别”。因为考虑到在没有类别的时候，表格视图中指定单元格的数量为1，所以在这种情况下需要设置一个特别的单元格。  
 
 步骤4：在prepare()方法中，修改destinationVC.selectedCategory = categories [indexPath.row]为destinationVC.selectedCategory = categories? [indexPath.row]，该行的报错消失。  
 
@@ -315,7 +315,7 @@ func loadItems() {
 ![](snapshot/Ch1409.jpeg)   
 图14-9 通过Xcode修改变量名称  
 
-步骤4：修改numberOfRowsInSection()方法中的代码为return todoItems.count ? ? 1。  
+步骤4：修改numberOfRowsInSection()方法中的代码为return todoItems.count ?? 1。  
 
 步骤5：修改cellForRowAt()方法为下面的样子  
 ```swift
@@ -684,7 +684,7 @@ extension TodoListViewController: SwipeTableViewCellDelegate {
 
 在之前的项目中我们曾使用过Chameleon框架。通过该框架，我们为应用程序界面设置了漂亮的颜色。在本节中我们将会使用该框架的一些其他的功能。  
 
-充分利用这些第三方类库，可以帮助我们快速完成项目的开发，而不用所有的代码都自己来亲自编写，这样可以使开发更有效率。很多程序员也会做出非常漂亮、实用的东西，并乐于将它们作为第三方类库分享到GitHub。而我们只需要通过非常少的代码去直接调用它们，何乐而不为呢？  
+充分利用这些第三方类库，可以帮助我们快速完成项目的开发，而不用所有的代码都自己来亲自编写，这样可以使开发更有效率。很多程序员也会做出非常漂亮、实用的东西，并乐于将它们作为第三方类库分享到GitHub。而我们只需要通过非常少的代码去直接调用它们，何乐而不为呢?  
 
 在Chameleon主页面上找到Swift 3的CocoaPods的安装代码，并将其复制到项目的Podfile文件中。  
 ```swift
@@ -715,7 +715,7 @@ pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chamel
 
 步骤3：在Category控制器类的viewDidLoad()方法中，添加一行tableView. separatorStyle = .none代码。  
 
-目前，在Category控制器中显示的类别单元格的背景色都是随机分配的，这也就意味着一旦我们关闭TODO再重新打开它的时候，颜色就会发生变化。如何固定住每个事务单元格的背景颜色呢？我们将会把与事务关联的颜色作为Category实体的属性。  
+目前，在Category控制器中显示的类别单元格的背景色都是随机分配的，这也就意味着一旦我们关闭TODO再重新打开它的时候，颜色就会发生变化。如何固定住每个事务单元格的背景颜色呢?我们将会把与事务关联的颜色作为Category实体的属性。  
 
 可能你会想到在Category类中添加一个新的colour属性，属性的类型为UIColor，如下面这样。  
 ```swift
@@ -761,7 +761,7 @@ let action = UIAlertAction(title: "添加", style: .default) { (action) in
 
 这里通过hexValue()方法获取颜色的hex值，它是字符串类型的值。  
 
-步骤3：在cellForRowAt()方法中，添加一行代码：cell.backgroundColor = UIColor(hexString: categories? [indexPath.row].colour ? ? "1D9BF6")。  
+步骤3：在cellForRowAt()方法中，添加一行代码：cell.backgroundColor = UIColor(hexString: categories? [indexPath.row].colour ?? "1D9BF6")。  
 
 这样设置单元格的背景色会从Realm的数据表中读取，如果无法获取到Category对象，则会直接设置背景色为1D9BF6。  
 
@@ -970,7 +970,7 @@ if let navBarColor = UIColor(hexString: colourHex) {
 ![](snapshot/Ch1431.jpeg)   
 图14-31 设置导航栏各个元素的颜色  
 
-在viewWillAppear()方法中，我们既使用了if语句又使用了guard语句，那么到底在什么情况下使用if或guard呢？其实并没有什么明确的划分，if语句包含为真时候的语句体、为假时候的语句体，以及其他情况的语句体。而guard则只有在为假的时候才执行其语句体，否则会向下继续执行。  
+在viewWillAppear()方法中，我们既使用了if语句又使用了guard语句，那么到底在什么情况下使用if或guard呢?其实并没有什么明确的划分，if语句包含为真时候的语句体、为假时候的语句体，以及其他情况的语句体。而guard则只有在为假的时候才执行其语句体，否则会向下继续执行。  
 
 根据笔者的经验，一般情况下还是用if语句比较好。如果在判断的时候，条件为假后会严重影响到应用的运行，则使用guard抛出致命错误的提示。  
 
@@ -990,10 +990,10 @@ override func viewWillDisappear(_ animated: Bool) {
 override  func  tableView(_  tableView:  UITableView,  cellForRowAt  indexPath:IndexPath) -> UITableViewCell {
   let  cell  =  tableView.dequeueReusableCell(withIdentifier:  "CategoryCell",  for:indexPath) as! SwipeTableViewCell
   cell.delegate = self
-  cell.textLabel.text = categories? [indexPath.row].name ? ? "没有任何的类别"
+  cell.textLabel.text = categories? [indexPath.row].name ?? "没有任何的类别"
 
   guard  let  categoryColour  =  UIColor(hexString:  categories? [
-  	indexPath.row].colour ? ? "1D9BF6") else { fatalError() }
+  	indexPath.row].colour ?? "1D9BF6") else { fatalError() }
 
   cell.textLabel.textColor = ContrastColorOf(categoryColour, returnFlat: true)
   cell.backgroundColor = categoryColour
