@@ -127,10 +127,10 @@
 单击Model Class中Inceptionv3右侧的箭头，就可以看到类的相关代码。接下来，我们需要编写一些代码将模型整合到视图控制器中。  
 
 步骤3：在ViewController.swift文件中，导入两个框架。  
-
-
-    import CoreML
-    import Vision
+```swift  
+import CoreML
+import Vision
+```
 vision框架可以帮助我们更简单地处理图像，其允许我们让图像在Core-ML中工作，并且免去编写一大堆的代码的麻烦。  
 
 - 实战：通过照片获取器在应用中拍照。  
@@ -138,8 +138,10 @@ vision框架可以帮助我们更简单地处理图像，其允许我们让图�
 使用UIImagePicker类可以让我们通过摄像头拍照并选择照片进行识别，整个过程非常简单。  
 
 步骤1：在ViewController类的声明中添加UIImagePickerControllerDelegate协议。
+```swift
+class ViewController: UIViewController,  UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+```  
 
-    class  ViewController:  UIViewController,  UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 在使用UIImagePickerControllerDelegate协议的时候，我们必须实现UINavigation-ControllerDelegate协议，它们是依赖关系。  
 
 步骤2：在故事板中选择ViewController视图，然后在菜单中选择Editor/Embed In/Navigation Controller，让当前的控制器内置于一个导航控制器之中，如图15-12所示。  
@@ -208,7 +210,7 @@ func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMed
 
 当用户从照片获取器中成功取图像以后会调用该方法，它带有2个参数：picker指明的是该方法来自于哪个UIImagePickerController对象的调用，当前是来自于imagePicker对象；参数info是字典类型格式，在该字典中，包含了用户所选择的图像。  
 
-在方法内部，首先通过info字典获取用户选择的图像，因为info是字典，所以需要通过键获取UIImage类型的图像，这个键名就是iOS SDK预定义好的UIImagePickerControl lerOriginalImage，代表用户所选择的图像原始图。  
+在方法内部，首先通过info字典获取用户选择的图像，因为info是字典，所以需要通过键获取UIImage类型的图像，这个键名就是iOS SDK预定义好的UIImagePickerControllerOriginalImage，代表用户所选择的图像原始图。  
 
 因为在方法中info字典的类型为[String : Any]，所以从info字典得到的值的类型为Any?，在将userPickedImage赋值给imageView的image属性的时候，编译器会报错Cannot assign value of type 'Any?' to type 'UIImage?'，即不能将Any？类型赋值给UIImage？类型。  
 
@@ -221,6 +223,24 @@ func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMed
   imagePicker.dismiss(animated: true, completion: nil)
 }
 ```
+**修正版**
+```swift
+func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    print("imagePickerController call")
+    if let userPickedImage = info[.originalImage] as? UIImage {
+        imageView.image = userPickedImage
+
+        guard let ciimage = CIImage(image: userPickedImage) else {
+            fatalError("无法转换图像到CIImage")
+        }
+        // 调用图像识别
+        detect(image: ciimage)
+    }
+
+    imagePicker.dismiss(animated: true, completion: nil)
+}
+```
+
 这里，使用可选绑定方式，如果info[UIImagePickerControllerOriginalImage]的值存在，则将其转换为可选UIImage类型，然后赋值给userPickedImage常量。如果有值，则再将userPickedImage赋值给imageView的image属性。这样既增加了代码的可读性，又使代码更加安全，所有的错误都消失了。  
 
 在方法的最后，我们使用dismiss()方法销毁照片获取器。  
