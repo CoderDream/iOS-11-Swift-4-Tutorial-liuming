@@ -117,7 +117,7 @@
 
 步骤1：在Xcode中创建一个新的Single View App项目，将Product Name设置为SeeFood。  
 
-步骤2：在之前提到的苹果网站中下载Model到本地，选择Inception V3，因为它的识别分类效果是目前最好的。将下载好的Inceptionv3.mlmodel文件拖曳到Xcode项目之中，确认勾选了Copy items if needed，单击Finish按钮。  
+步骤2：在之前提到的苹果网站中[下载](https://docs-assets.developer.apple.com/coreml/models/Inceptionv3.mlmodel)Model到本地，选择Inception V3，因为它的识别分类效果是目前最好的。将下载好的Inceptionv3.mlmodel文件拖曳到Xcode项目之中，确认勾选了Copy items if needed，单击Finish按钮。  
 
 一旦我们将Inceptionv3.mlmodel文件添加到项目之中，在项目导航中单击该文件以后，在编辑窗口中我们就可以看到Xcode已经为该模型创建了一个Model Class，如图15-11所示。  
 
